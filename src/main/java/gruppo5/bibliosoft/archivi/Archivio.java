@@ -7,35 +7,35 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public abstract class Archivio<T> implements InterfacciaArchivio<T> {
-    protected Set<T> elementi = new TreeSet<>();
+public abstract class Archivio<T> implements InterfacciaArchivio<T> {   //archivio implementa l'interfaccia archivio
+    protected Set<T> elementi = new TreeSet<>();    //il tree set organizza gli elementi in base a un criterio di ordinamento (da creare)
     
     @Override
-    public void aggiungi(T elemento){
+    public void aggiungi(T elemento){   //metodo che aggiunge un elemento alla collezzione
         elementi.add(elemento);
     }
     
     @Override         
-    public void rimuovi(T elemento){
+    public void rimuovi(T elemento){    //metodo che rimuove un elemento dalla collezzione
         elementi.remove(elemento);
     }
     
     @Override
-    public List<T> cerca(Filtro<T> filtro){
-        if(filtro == null)
-            return new ArrayList<>(elementi);
+    public List<T> cerca(Filtro<T> filtro){ //funzione che restituisce una lista filtrata in base a un filtro
+        if(filtro == null)  //se il filtro è null, allora restuisco l'intera lista (non filtrata)
+            return lista();
         
-        List<T> risultati = new ArrayList<>();
+        List<T> risultati = new ArrayList<>();  //creo una lista per il risultato della ricerca
         
-        for(T elemento : elementi)
-            if(filtro.controlla(elemento))
-                risultati.add(elemento);
+        for(T elemento : elementi)  //per ogni elemento della collezzione...
+            if(filtro.controlla(elemento))  //controllo se rispetta il filtro
+                risultati.add(elemento);    //lo aggiungo alla lista dei risultati
         
-        return risultati;
+        return risultati;   //restituisco i risultati
     }
     
     @Override
-    public List<T> lista(){
-        return new ArrayList<>(elementi);
+    public List<T> lista(){ //funzione che restuisce la lista degli elementi
+        return new ArrayList<>(elementi);   //restituisco la lista degli elementi
     }
 }

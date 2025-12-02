@@ -15,57 +15,55 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Bibliosoft extends Application {
-
-    private static Scene scene;
+    private static Scene scena; //scena principale
 
     @Override
     public void start(Stage stage) throws IOException {
-        // archivi:
+        //instanzio gli archivi:
         ArchivioLibri archivioLibri = new ArchivioLibri();
         ArchivioUtenti archivioUtenti = new ArchivioUtenti();
         ArchivioPrestiti archivioPrestiti = new ArchivioPrestiti();
 
-        // servizi:
+        //istanzio i servizi:
         ServizioLibri servizioLibri = new ServizioLibri(archivioLibri);
         ServizioUtenti servizioUtenti = new ServizioUtenti(archivioUtenti);
         ServizioPrestiti servizioPrestiti = new ServizioPrestiti(archivioPrestiti, archivioLibri, archivioUtenti);
-        ServizioArchivio servizioArchivio
-                = new ServizioArchivio("archivio.dat", archivioLibri, archivioUtenti, archivioPrestiti);
+        ServizioArchivio servizioArchivio = new ServizioArchivio("archivio.dat", archivioLibri, archivioUtenti, archivioPrestiti);
 
         
  
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gruppo5/bibliosoft/fxml/main.fxml"));
-        Scene scene = new Scene(loader.load());
-        scene.getStylesheets().add(getClass().getResource("/gruppo5/bibliosoft/css/style.css").toExternalForm());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gruppo5/bibliosoft/fxml/main.fxml"));   //carico il file fxml contenente la menubar e le tab
+        Scene scena = new Scene(loader.load()); //carico la scena
+        scena.getStylesheets().add(getClass().getResource("/gruppo5/bibliosoft/css/style.css").toExternalForm());   //aggiungo il foglio di stile alla scena
 
-        ControllerPrincipale controller = loader.getController();
-        controller.inizializzaServizi(servizioLibri, servizioUtenti, servizioPrestiti, servizioArchivio);
+        ControllerPrincipale controller = loader.getController();   //instanzio il controller principale
+        controller.inizializzaServizi(servizioLibri, servizioUtenti, servizioPrestiti, servizioArchivio);   //inizializzo i diversi servizi nel controller principale
 
-        stage.setTitle("BiblioSoft - Gestionale Biblioteca");
-        stage.setScene(scene);
-        stage.setMinWidth(900);
-        stage.setMinHeight(600);
-        stage.show();
+        stage.setTitle("BiblioSoft - Gestionale Biblioteca");   //do un titolo allo stage
+        stage.setScene(scena);  //setto la scena nello stage
+        stage.setMinWidth(900); //imposto una larghezza minima per lo stage (più di questo non può essere rimpicciolito
+        stage.setMinHeight(600); //imposto un'altezza minima per lo stage (più di questo non può essere rimpicciolito
+        stage.show();   //mostro lo stage
 
-        try {
-            servizioArchivio.carica();
-            controller.aggiornaTutto();
+        try {   
+            servizioArchivio.carica();  //carico il servizio che si preoccupa di caricare o salvare i dati in un file oggetto (archivio.dat)
+            controller.aggiornaTutto(); //dico al controller di aggiornare tutto
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
+    /* static void setRoot(String fxml) throws IOException {
+        scena.setRoot(loadFXML(fxml));
+    }*/
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    private static Parent loadFXML(String fxml) throws IOException {    //funzione per caricare i file fxml cercandoli nelle risorse del progetto
         FXMLLoader fxmlLoader = new FXMLLoader(Bibliosoft.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
-        launch();
+    public static void main(String[] args) {    //il main lancia l'applicazione
+        launch();   //lancio l'applicazione
     }
 
 }
