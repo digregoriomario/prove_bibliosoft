@@ -127,6 +127,7 @@ public class ControllerPrestiti implements Initializable {
                 LocalDate today = LocalDate.now();
                 if (item != null && (item.isBefore(today) || item.isEqual(today)))
                     setDisable(true);
+                
             }
         });
     }

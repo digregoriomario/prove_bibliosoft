@@ -1,7 +1,7 @@
 gruppo5/bibliosoft/archivi/filtri/utenti/FiltroMatricola.class
 gruppo5/bibliosoft/archivi/filtri/libri/FiltroIsbn.class
-gruppo5/bibliosoft/archivi/Archivio.class
 gruppo5/bibliosoft/controller/ControllerPrestiti.class
+gruppo5/bibliosoft/archivi/Archivio.class
 gruppo5/bibliosoft/modelli/Utente.class
 gruppo5/bibliosoft/servizi/ServizioArchivio.class
 gruppo5/bibliosoft/servizi/ServizioPrestiti.class
@@ -24,8 +24,8 @@ gruppo5/bibliosoft/archivi/filtri/prestiti/FiltroMatricolaAttivi.class
 gruppo5/bibliosoft/Bibliosoft.class
 gruppo5/bibliosoft/archivi/ArchivioLibri.class
 gruppo5/bibliosoft/servizi/ServizioUtenti.class
-gruppo5/bibliosoft/archivi/comparatori/prestiti/ComparatoreDataInizio.class
 gruppo5/bibliosoft/controller/ControllerPrestiti$1.class
+gruppo5/bibliosoft/archivi/comparatori/prestiti/ComparatoreDataInizio.class
 gruppo5/bibliosoft/archivi/filtri/utenti/FiltroRicercaUtenti.class
 gruppo5/bibliosoft/archivi/filtri/prestiti/FiltroAttivi.class
 gruppo5/bibliosoft/controller/ControllerLibri.class
