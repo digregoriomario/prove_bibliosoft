@@ -82,6 +82,12 @@ public class ControllerPrestiti implements Initializable {
         comboUtente.setItems(FXCollections.observableArrayList(servizioUtenti.listaUtenti()));
         comboLibro.setItems(FXCollections.observableArrayList(servizioLibri.listaLibri()));
     }
+    
+    public void pulisciCampi(){
+        comboUtente.getSelectionModel().clearSelection();
+        comboLibro.getSelectionModel().clearSelection();
+        dataPrevista.setValue(null);
+    }
 
     @FXML
     private void onRegistraPrestito() {
@@ -120,6 +126,7 @@ public class ControllerPrestiti implements Initializable {
     public void aggiorna() {
         datiPrestiti.setAll(servizioPrestiti.monitoraggio());
         aggiornaCombo();
+        pulisciCampi();
         dataPrevista.setDayCellFactory(dp -> new DateCell() {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
