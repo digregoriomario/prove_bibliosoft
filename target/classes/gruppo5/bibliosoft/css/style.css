@@ -16,3 +16,29 @@
 .table-view {
     -fx-table-cell-border-color: transparent;
 }
+
+#titolo{
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+}
+
+.sottotitolo{
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+}
+
+.statistica{
+    -fx-font-size: 25px;
+    /*-fx-font-weight: bold;*/
+}
+
+.contatore{
+    -fx-font-weight: bold;
+}
+
+.bottoni_filtro{
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+    -fx-border-color: grey;
+}

@@ -47,4 +47,24 @@ public class ServizioLibri {
         
         return archivioLibri.cerca(FiltroLibro.ricerca(filtro));
     }
+    
+    public int getLibriTotali(){
+        return archivioLibri.contaElementi();
+    }
+    
+    public int getCopieTotali(){
+        int contatore = 0;
+        for(Libro libro : archivioLibri.lista())
+            contatore += libro.getCopieTotali();
+        
+        return contatore;
+    }
+    
+        public int getCopieDisponibili(){
+        int contatore = 0;
+        for(Libro libro : archivioLibri.lista())
+            contatore += libro.getCopieDisponibili();
+        
+        return contatore;
+    }
 }

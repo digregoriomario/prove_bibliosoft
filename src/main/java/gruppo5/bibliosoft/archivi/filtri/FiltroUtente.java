@@ -14,4 +14,8 @@ public class FiltroUtente {
         return l -> l.getCognome().toLowerCase().contains(stringaFiltro.toLowerCase())
                 || l.getMatricola().contains(stringaFiltro);
     }
+    
+    public static Filtro<Utente> ricercaUtentiAttivi() {
+        return l -> ! l.getPrestitiAttivi().isEmpty();
+    }
 }

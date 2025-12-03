@@ -1,7 +1,7 @@
 package gruppo5.bibliosoft.servizi;
 
-import gruppo5.bibliosoft.archivi.filtri.FiltroUtente;
 import gruppo5.bibliosoft.archivi.ArchivioUtenti;
+import gruppo5.bibliosoft.archivi.filtri.FiltroUtente;
 import gruppo5.bibliosoft.modelli.Utente;
 import gruppo5.bibliosoft.strumenti.*;
 
@@ -44,5 +44,13 @@ public class ServizioUtenti {
             return listaUtenti();
         
         return archivioUtenti.cerca(FiltroUtente.ricerca(filtro));
+    }
+    
+    public int getUtentiTotali(){
+        return archivioUtenti.contaElementi();
+    }
+    
+    public int getUtentiAttivi(){
+        return archivioUtenti.cerca(FiltroUtente.ricercaUtentiAttivi()).size();
     }
 }

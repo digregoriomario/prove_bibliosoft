@@ -1,13 +1,16 @@
 package gruppo5.bibliosoft.controller;
 
+import gruppo5.bibliosoft.archivi.filtri.Filtro;
 import gruppo5.bibliosoft.modelli.*;
 import gruppo5.bibliosoft.servizi.*;
+import gruppo5.bibliosoft.archivi.filtri.FiltroPrestito;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -40,6 +43,8 @@ public class ControllerPrestiti implements Initializable {
     private TableColumn<Prestito, LocalDate> colEffettiva;
     @FXML
     private TableColumn<Prestito, StatoPrestito> colStato;
+    
+    
 
     private ServizioPrestiti servizioPrestiti;
     private ServizioUtenti servizioUtenti;
@@ -58,7 +63,8 @@ public class ControllerPrestiti implements Initializable {
         this.servizioUtenti = servizioUtenti;
         this.servizioLibri = servizioLibri;
         inizializzaTabella();
-        aggiorna();
+        
+        aggiorna(FiltroPrestito.filtraAttivi());
     }
 
     private void inizializzaTabella() {
@@ -76,6 +82,21 @@ public class ControllerPrestiti implements Initializable {
                 -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getStato()));
 
         tabellaPrestiti.setItems(datiPrestiti);
+    }
+    
+    @FXML
+    private void mostraAttivi(ActionEvent event){
+        aggiorna(FiltroPrestito.filtraAttivi());
+    }
+    
+    @FXML
+    private void mostraConclusi(ActionEvent event){
+        aggiorna(FiltroPrestito.filtraConclusi());
+    }
+    
+    @FXML
+    private void mostraTutti(ActionEvent event){
+        aggiorna(null);
     }
 
     private void aggiornaCombo() {
@@ -101,7 +122,7 @@ public class ControllerPrestiti implements Initializable {
         try {
             servizioPrestiti.registraPrestito(utente, libro, data);
             ControllerPrincipale.modificheEffettuate = true;
-            aggiorna();
+            aggiorna(null);
         } catch (Exception ex) {
             mostraErrore(ex.getMessage());
         }
@@ -117,14 +138,14 @@ public class ControllerPrestiti implements Initializable {
         try {
             servizioPrestiti.registraRestituzione(prestito);
             ControllerPrincipale.modificheEffettuate = true;
-            aggiorna();
+            aggiorna(null);
         } catch (Exception ex) {
             mostraErrore(ex.getMessage());
         }
     }
 
-    public void aggiorna() {
-        datiPrestiti.setAll(servizioPrestiti.monitoraggio());
+    public void aggiorna(Filtro<Prestito> filtro) {
+        datiPrestiti.setAll(servizioPrestiti.cerca(filtro));
         aggiornaCombo();
         pulisciCampi();
         dataPrevista.setDayCellFactory(dp -> new DateCell() {

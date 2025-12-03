@@ -2,8 +2,7 @@ package gruppo5.bibliosoft.servizi;
 
 import gruppo5.bibliosoft.archivi.*;
 import gruppo5.bibliosoft.modelli.*;
-import gruppo5.bibliosoft.archivi.filtri.FiltroPrestito;
-import gruppo5.bibliosoft.archivi.comparatori.prestiti.*;
+import gruppo5.bibliosoft.archivi.filtri.*;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -63,16 +62,21 @@ public class ServizioPrestiti {
         }
     }
 
-    public List<Prestito> monitoraggio() {
+    public List<Prestito> lista() {
         aggiornaRitardi();
-        List<Prestito> risultato =  archivioPrestiti.cerca(FiltroPrestito.filtraAttivi());
-        risultato.sort(new ComparatoreDataPrevista());
-        return risultato;
+        return archivioPrestiti.lista();
+        //List<Prestito> risultato =  archivioPrestiti.cerca(FiltroPrestito.filtraAttivi());
+        //risultato.sort(null);   //se passo null ordinerà secondo l'ordine naturale (la sort teoricaemente è inutile)
+        //return risultato;
     }
+    
+   public List<Prestito> cerca(Filtro<Prestito> filtro){
+       return archivioPrestiti.cerca(filtro);
+   }
 
     public List<Prestito> storico(Utente utente) {
         List<Prestito> risultato =  archivioPrestiti.cerca(FiltroPrestito.ricercaMatricola(utente.getMatricola()));
-        risultato.sort(new ComparatoreDataInizio());
+        risultato.sort(null);   //se passo null ordinerà secondo l'ordine naturale (la sort teoricaemente è inutile)
         return risultato;
     }
     

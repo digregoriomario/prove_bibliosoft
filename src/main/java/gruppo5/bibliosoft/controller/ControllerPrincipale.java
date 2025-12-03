@@ -1,5 +1,6 @@
 package gruppo5.bibliosoft.controller;
 
+import gruppo5.bibliosoft.archivi.filtri.FiltroPrestito;
 import gruppo5.bibliosoft.servizi.*;
 
 import java.io.IOException;
@@ -111,7 +112,7 @@ public class ControllerPrincipale {
     }
 
     public void aggiornaTutto() {
-        if(controllerPannelloControllo != null)
+        if(controllerPannelloControllo != null) 
             controllerPannelloControllo.aggiorna();
         if (controllerLibri != null) {
             controllerLibri.aggiorna();
@@ -120,7 +121,7 @@ public class ControllerPrincipale {
             controllerUtenti.aggiorna();
         }
         if (controllerPrestiti != null) {
-            controllerPrestiti.aggiorna();
+            controllerPrestiti.aggiorna(FiltroPrestito.filtraAttivi());
         }
     }
 

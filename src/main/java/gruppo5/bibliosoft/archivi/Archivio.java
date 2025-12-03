@@ -38,4 +38,9 @@ public abstract class Archivio<T> implements InterfacciaArchivio<T> {   //archiv
     public List<T> lista(){ //funzione che restuisce la lista degli elementi
         return new ArrayList<>(elementi);   //restituisco la lista degli elementi
     }
+    
+    @Override
+    public int contaElementi(){
+        return elementi.size();
+    }
 }
