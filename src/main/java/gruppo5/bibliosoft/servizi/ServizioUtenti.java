@@ -1,6 +1,6 @@
 package gruppo5.bibliosoft.servizi;
 
-import gruppo5.bibliosoft.archivi.filtri.utenti.*;
+import gruppo5.bibliosoft.archivi.filtri.FiltroUtente;
 import gruppo5.bibliosoft.archivi.ArchivioUtenti;
 import gruppo5.bibliosoft.modelli.Utente;
 import gruppo5.bibliosoft.strumenti.*;
@@ -17,7 +17,7 @@ public class ServizioUtenti {
 
     public void aggiungiUtente(Utente utente) {
         Validatore.validaUtente(utente);
-        if(! archivioUtenti.cerca(new FiltroMatricola(utente.getMatricola())).isEmpty())
+        if(! archivioUtenti.cerca(FiltroUtente.ricercaMatricola(utente.getMatricola())).isEmpty())
             throw new IllegalArgumentException("Matricola già presente");
         
         archivioUtenti.aggiungi(utente);
@@ -43,6 +43,6 @@ public class ServizioUtenti {
         if (filtro == null || filtro.isBlank())
             return listaUtenti();
         
-        return archivioUtenti.cerca(new FiltroRicercaUtenti(filtro));
+        return archivioUtenti.cerca(FiltroUtente.ricerca(filtro));
     }
 }

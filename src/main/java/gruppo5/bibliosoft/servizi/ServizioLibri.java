@@ -1,9 +1,8 @@
 package gruppo5.bibliosoft.servizi;
 
-import gruppo5.bibliosoft.archivi.filtri.libri.*;
 import gruppo5.bibliosoft.archivi.ArchivioLibri;
 import gruppo5.bibliosoft.modelli.Libro;
-import gruppo5.bibliosoft.archivi.filtri.*;
+import gruppo5.bibliosoft.archivi.filtri.FiltroLibro;
 import gruppo5.bibliosoft.strumenti.*;
 
 import java.util.Comparator;
@@ -20,7 +19,7 @@ public class ServizioLibri {
 
     public void aggiungiLibro(Libro libro) {
         Validatore.validaLibro(libro);
-        if(! archivioLibri.cerca(new FiltroIsbn(libro.getIsbn())).isEmpty())
+        if(! archivioLibri.cerca(FiltroLibro.ricerca(libro.getIsbn())).isEmpty())
             throw new IllegalArgumentException("ISBN già presente");
         
         archivioLibri.aggiungi(libro);
@@ -46,6 +45,6 @@ public class ServizioLibri {
         if (filtro == null || filtro.isBlank())
             return listaLibri();
         
-        return archivioLibri.cerca(new FiltroRicerca(filtro));
+        return archivioLibri.cerca(FiltroLibro.ricerca(filtro));
     }
 }

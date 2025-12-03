@@ -28,7 +28,7 @@ public abstract class Archivio<T> implements InterfacciaArchivio<T> {   //archiv
         List<T> risultati = new ArrayList<>();  //creo una lista per il risultato della ricerca
         
         for(T elemento : elementi)  //per ogni elemento della collezzione...
-            if(filtro.controlla(elemento))  //controllo se rispetta il filtro
+            if(filtro.filtra(elemento))  //controllo se rispetta il filtro
                 risultati.add(elemento);    //lo aggiungo alla lista dei risultati
         
         return risultati;   //restituisco i risultati
