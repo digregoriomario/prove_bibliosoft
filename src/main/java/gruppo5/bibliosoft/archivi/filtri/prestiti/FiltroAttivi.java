@@ -7,6 +7,6 @@ import gruppo5.bibliosoft.modelli.StatoPrestito;
 public class FiltroAttivi implements Filtro<Prestito> {
     @Override
     public boolean controlla(Prestito prestito) {
-        return prestito.getStato() == StatoPrestito.IN_CORSO || prestito.getStato() == StatoPrestito.IN_RITARDO;
+        return new FiltroInCorso().controlla(prestito) || new FiltroInRitardo().controlla(prestito);
     }
 }

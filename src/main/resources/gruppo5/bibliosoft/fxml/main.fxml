@@ -30,7 +30,7 @@
     <center>
         <TabPane fx:id="tabPane">
             <tabs>
-            <Tab closable="false" text="Dashboard" />
+            <Tab fx:id="tabPannelloDiControllo" closable="false" text="Pannello di controllo" />
                 <Tab fx:id="tabLibri" closable="false" onSelectionChanged="#cambioTab" text="Libri" />
                 <Tab fx:id="tabUtenti" closable="false" onSelectionChanged="#cambioTab" text="Utenti" />
                 <Tab fx:id="tabPrestiti" closable="false" onSelectionChanged="#cambioTab" text="Prestiti" />

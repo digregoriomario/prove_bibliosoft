@@ -75,4 +75,16 @@ public class ServizioPrestiti {
         risultato.sort(new ComparatoreDataInizio());
         return risultato;
     }
+    
+    public int getPrestitiInRitardo(){
+        return archivioPrestiti.cerca(new FiltroInRitardo()).size();
+    }
+    
+    public int getPrestitiConclusi(){
+        return archivioPrestiti.cerca(new FiltroConclusi()).size();
+    }
+    
+    public int getPrestitiInCorso(){
+        return archivioPrestiti.cerca(new FiltroInCorso()).size();
+    }
 }

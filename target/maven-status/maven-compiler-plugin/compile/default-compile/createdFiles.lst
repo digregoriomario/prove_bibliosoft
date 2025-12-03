@@ -4,6 +4,7 @@ gruppo5/bibliosoft/controller/ControllerPrestiti.class
 gruppo5/bibliosoft/archivi/Archivio.class
 gruppo5/bibliosoft/modelli/Utente.class
 gruppo5/bibliosoft/servizi/ServizioArchivio.class
+gruppo5/bibliosoft/archivi/filtri/prestiti/FiltroInRitardo.class
 gruppo5/bibliosoft/servizi/ServizioPrestiti.class
 module-info.class
 gruppo5/bibliosoft/archivi/filtri/prestiti/FiltroMatricola.class
@@ -11,6 +12,8 @@ gruppo5/bibliosoft/archivi/comparatori/prestiti/ComparatoreDataPrevista.class
 gruppo5/bibliosoft/strumenti/Validatore.class
 gruppo5/bibliosoft/modelli/Libro.class
 gruppo5/bibliosoft/controller/ControllerUtenti.class
+gruppo5/bibliosoft/archivi/filtri/prestiti/FiltroConclusi.class
+gruppo5/bibliosoft/controller/ControllerPannelloControllo.class
 gruppo5/bibliosoft/archivi/ArchivioPrestiti.class
 gruppo5/bibliosoft/modelli/StatoPrestito.class
 gruppo5/bibliosoft/servizi/ServizioLibri.class
@@ -23,6 +26,7 @@ gruppo5/bibliosoft/controller/ControllerPrincipale.class
 gruppo5/bibliosoft/archivi/filtri/prestiti/FiltroMatricolaAttivi.class
 gruppo5/bibliosoft/Bibliosoft.class
 gruppo5/bibliosoft/archivi/ArchivioLibri.class
+gruppo5/bibliosoft/archivi/filtri/prestiti/FiltroInCorso.class
 gruppo5/bibliosoft/servizi/ServizioUtenti.class
 gruppo5/bibliosoft/controller/ControllerPrestiti$1.class
 gruppo5/bibliosoft/archivi/comparatori/prestiti/ComparatoreDataInizio.class

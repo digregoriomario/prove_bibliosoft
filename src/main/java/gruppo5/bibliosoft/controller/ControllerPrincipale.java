@@ -24,6 +24,8 @@ public class ControllerPrincipale {
     @FXML
     private TabPane tabPane;
     @FXML
+    private Tab tabPannelloDiControllo;
+    @FXML
     private Tab tabLibri;
     @FXML
     private Tab tabUtenti;
@@ -34,14 +36,14 @@ public class ControllerPrincipale {
     private ServizioUtenti servizioUtenti;
     private ServizioPrestiti servizioPrestiti;
     private ServizioArchivio servizioArchivio;
-
+    
+    private ControllerPannelloControllo controllerPannelloControllo;
     private ControllerLibri controllerLibri;
     private ControllerUtenti controllerUtenti;
     private ControllerPrestiti controllerPrestiti;
 
     @FXML
     public void cambioTab() {
-        System.out.print("\n\ncambiota\n\n");
         aggiornaTutto();
     }
 
@@ -54,9 +56,22 @@ public class ControllerPrincipale {
         this.servizioPrestiti = servizioPrestiti;
         this.servizioArchivio = servizioArchivio;
 
+        caricaVistaPannelloDiControllo();
         caricaVistaLibri();
         caricaVistaUtenti();
         caricaVistaPrestiti();
+    }
+    
+    private void caricaVistaPannelloDiControllo() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gruppo5/bibliosoft/fxml/pannello_di_controllo.fxml"));
+            Node content = loader.load();
+            controllerPannelloControllo = loader.getController();
+            controllerPannelloControllo.impostaServizi(servizioPrestiti, servizioUtenti, servizioLibri);
+            tabPannelloDiControllo.setContent(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void caricaVistaLibri() {
@@ -96,6 +111,8 @@ public class ControllerPrincipale {
     }
 
     public void aggiornaTutto() {
+        if(controllerPannelloControllo != null)
+            controllerPannelloControllo.aggiorna();
         if (controllerLibri != null) {
             controllerLibri.aggiorna();
         }
