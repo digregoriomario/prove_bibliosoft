@@ -1,7 +1,7 @@
 package gruppo5.bibliosoft.controller;
 
 import gruppo5.bibliosoft.servizi.*;
-import java.time.LocalDate;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -62,7 +62,7 @@ public class ControllerPannelloControllo {
     }
     
     public void aggiornaStatisticheLibri(){
-        libriTotali.setText(LocalDate.now().toString() + " " + Integer.toString(servizioLibri.getLibriTotali()));
+        libriTotali.setText(Integer.toString(servizioLibri.getLibriTotali()));
         copieTotali.setText(Integer.toString(servizioLibri.getCopieTotali()));
         copieDisponibili.setText(Integer.toString(servizioLibri.getCopieDisponibili()));
     }

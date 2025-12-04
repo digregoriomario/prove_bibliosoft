@@ -17,8 +17,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import gruppo5.bibliosoft.archivi.filtri.InterfacciaFiltro;
+import javafx.scene.control.Button;
 
-public class ControllerPrestiti{
+public class ControllerPrestiti {
+
     private InterfacciaFiltro<Prestito> filtroCorrente = FiltroPrestito.filtraAttivi();
 
     @FXML
@@ -41,15 +43,21 @@ public class ControllerPrestiti{
     private TableColumn<Prestito, LocalDate> colEffettiva;
     @FXML
     private TableColumn<Prestito, StatoPrestito> colStato;
-    
-    
+
+    @FXML
+    private Button bottoneAttivi;
+
+    @FXML
+    private Button bottoneConclusi;
+
+    @FXML
+    private Button bottoneTutti;
 
     private InterfacciaServizioPrestiti servizioPrestiti;
     private ServizioUtenti servizioUtenti;
     private ServizioLibri servizioLibri;
 
     private final ObservableList<Prestito> datiPrestiti = FXCollections.observableArrayList();
-
 
     public void impostaServizi(InterfacciaServizioPrestiti servizioPrestiti,
             ServizioUtenti servizioUtenti,
@@ -58,8 +66,10 @@ public class ControllerPrestiti{
         this.servizioUtenti = servizioUtenti;
         this.servizioLibri = servizioLibri;
         inizializzaTabella();
-        
+
+        selezionaFiltro(bottoneAttivi);
         aggiorna();
+        
     }
 
     private void inizializzaTabella() {
@@ -78,31 +88,46 @@ public class ControllerPrestiti{
 
         tabellaPrestiti.setItems(datiPrestiti);
     }
-    
+
     @FXML
-    private void mostraAttivi(ActionEvent event){
+    private void mostraAttivi(ActionEvent event) {
         filtroCorrente = FiltroPrestito.filtraAttivi();
+        selezionaFiltro(bottoneAttivi);
         aggiorna();
     }
-    
+
     @FXML
-    private void mostraConclusi(ActionEvent event){
+    private void mostraConclusi(ActionEvent event) {
         filtroCorrente = FiltroPrestito.filtraConclusi();
+        selezionaFiltro(bottoneConclusi);
         aggiorna();
     }
-    
+
     @FXML
-    private void mostraTutti(ActionEvent event){
+    private void mostraTutti(ActionEvent event) {
         filtroCorrente = null;
+        selezionaFiltro(bottoneTutti);
         aggiorna();
+    }
+
+    private void selezionaFiltro(Button attivo) {
+        // rimuovo lo stile "attivo" da tutti
+        bottoneAttivi.getStyleClass().remove("bottoni_filtro_attivo");
+        bottoneConclusi.getStyleClass().remove("bottoni_filtro_attivo");
+        bottoneTutti.getStyleClass().remove("bottoni_filtro_attivo");
+
+        // aggiungo lo stile "attivo" solo a quello selezionato
+        if (!attivo.getStyleClass().contains("bottoni_filtro_attivo")) {
+            attivo.getStyleClass().add("bottoni_filtro_attivo");
+        }
     }
 
     private void aggiornaCombo() {
         comboUtente.setItems(FXCollections.observableArrayList(servizioUtenti.listaUtenti()));
         comboLibro.setItems(FXCollections.observableArrayList(servizioLibri.listaLibri()));
     }
-    
-    public void pulisciCampi(){
+
+    public void pulisciCampi() {
         comboUtente.getSelectionModel().clearSelection();
         comboLibro.getSelectionModel().clearSelection();
         dataPrevista.setValue(null);
@@ -145,6 +170,7 @@ public class ControllerPrestiti{
     public void aggiorna() {
         servizioPrestiti.aggiornaRitardi();
         datiPrestiti.setAll(servizioPrestiti.cerca(filtroCorrente));
+        //tabellaPrestiti.refresh();
         aggiornaCombo();
         pulisciCampi();
         dataPrevista.setDayCellFactory(dp -> new DateCell() {
@@ -152,9 +178,10 @@ public class ControllerPrestiti{
             public void updateItem(LocalDate elemento, boolean vuoto) {
                 super.updateItem(elemento, vuoto);
                 LocalDate oggi = LocalDate.now();
-                if (elemento != null && (elemento.isBefore(oggi) || elemento.isEqual(oggi)))
+                if (elemento != null && (elemento.isBefore(oggi) || elemento.isEqual(oggi))) {
                     setDisable(true);
-                
+                }
+
             }
         });
     }

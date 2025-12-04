@@ -37,11 +37,11 @@
                </VBox.margin>
               </HBox>
             <Separator prefHeight="0.0" prefWidth="895.0" VBox.vgrow="ALWAYS" />
-            <HBox style="-fx-border-color: grey; -fx-border-radius: 5; -fx-background-color: lightgrey; -fx-background-radius: 5;">
+            <HBox>
                <children>
-                  <Button mnemonicParsing="false" onAction="#mostraAttivi" styleClass="bottoni_filtro" text="Attivi" />
-                  <Button mnemonicParsing="false" onAction="#mostraConclusi" styleClass="bottoni_filtro" text="Conclusi" />
-                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#mostraTutti" styleClass="bottoni_filtro" text="Tutti" />
+                  <Button fx:id="bottoneAttivi" mnemonicParsing="false" onAction="#mostraAttivi" styleClass="bottoni_filtro" text="Attivi" />
+                  <Button fx:id="bottoneConclusi" mnemonicParsing="false" onAction="#mostraConclusi" styleClass="bottoni_filtro" text="Conclusi" />
+                  <Button fx:id="bottoneTutti" focusTraversable="false" mnemonicParsing="false" onAction="#mostraTutti" styleClass="bottoni_filtro" text="Tutti" />
                </children>
                <VBox.margin>
                   <Insets top="10.0" />

@@ -101,6 +101,7 @@ public class Prestito implements Serializable, Comparable<Prestito>{
 
     @Override
     public int compareTo(Prestito prestito) {
-        return dataPrevista.compareTo(prestito.getDataPrevista());
+        int cmp = dataPrevista.compareTo(prestito.getDataPrevista());
+        return (cmp != 0) ? cmp : id.compareTo(prestito.getId());
     }
 }
