@@ -7,9 +7,9 @@ import javafx.scene.control.Label;
 
 public class ControllerPannelloControllo {
 
-    private InterfacciaServizioPrestiti servizioPrestiti;
-    private InterfacciaServizioUtenti servizioUtenti;
-    private InterfacciaServizioLibri servizioLibri;
+    private ServizioPrestiti servizioPrestiti;
+    private ServizioUtenti servizioUtenti;
+    private ServizioLibri servizioLibri;
     
     @FXML
     private Label prestitiInCorso;
@@ -35,7 +35,7 @@ public class ControllerPannelloControllo {
     @FXML
     private Label copieDisponibili;
     
-    public void impostaServizi(InterfacciaServizioPrestiti servizioPrestiti,
+    public void impostaServizi(ServizioPrestiti servizioPrestiti,
             ServizioUtenti servizioUtenti,
             ServizioLibri servizioLibri) {
         this.servizioPrestiti = servizioPrestiti;

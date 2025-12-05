@@ -1,56 +1,56 @@
 package gruppo5.bibliosoft.servizi;
 
-import gruppo5.bibliosoft.archivi.ArchivioUtenti;
+import gruppo5.bibliosoft.archivi.Archivio;
 import gruppo5.bibliosoft.archivi.filtri.FiltroUtente;
 import gruppo5.bibliosoft.modelli.Utente;
 import gruppo5.bibliosoft.strumenti.*;
 
 import java.util.List;
 
-public class ServizioUtenti implements InterfacciaServizioUtenti {
+public class ServizioUtenti{
 
-    private final ArchivioUtenti archivioUtenti;
+    private final Archivio archivio;
 
-    public ServizioUtenti(ArchivioUtenti archivioUtenti) {
-        this.archivioUtenti = archivioUtenti;
+    public ServizioUtenti(Archivio archivio) {
+        this.archivio = archivio;
     }
 
     public void aggiungiUtente(Utente utente) {
         Validatore.validaUtente(utente);
-        if(! archivioUtenti.cerca(FiltroUtente.ricercaMatricola(utente.getMatricola())).isEmpty())
+        if(! archivio.cercaUtenti(FiltroUtente.ricercaMatricola(utente.getMatricola())).isEmpty())
             throw new IllegalArgumentException("Matricola già presente");
         
-        archivioUtenti.aggiungi(utente);
+        archivio.aggiungiUtente(utente);
     }
 
     public void modificaUtente(Utente utente) {
         Validatore.validaUtente(utente);
-        archivioUtenti.modifica(utente);
+        archivio.modificaUtente(utente);
     }
 
     public void eliminaUtente(Utente utente) {
         if (utente.haPrestitiAttivi())
             throw new IllegalStateException("Utente con prestiti attivi: eliminazione negata");
         
-        archivioUtenti.rimuovi(utente);
+        archivio.rimuoviUtente(utente);
     }
 
     public List<Utente> listaUtenti() {
-        return archivioUtenti.lista();
+        return archivio.listaUtenti();
     }
 
     public List<Utente> cerca(String filtro) {
         if (filtro == null || filtro.isBlank())
             return listaUtenti();
         
-        return archivioUtenti.cerca(FiltroUtente.ricerca(filtro));
+        return archivio.cercaUtenti(FiltroUtente.ricerca(filtro));
     }
     
     public int getUtentiTotali(){
-        return archivioUtenti.contaElementi();
+        return archivio.contaUtenti();
     }
     
     public int getUtentiAttivi(){
-        return archivioUtenti.cerca(FiltroUtente.ricercaUtentiAttivi()).size();
+        return archivio.cercaUtenti(FiltroUtente.ricercaUtentiAttivi()).size();
     }
 }

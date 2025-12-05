@@ -1,7 +1,8 @@
 package gruppo5.bibliosoft.controller;
 
+import gruppo5.bibliosoft.archivi.filtri.FiltroLibro;
 import gruppo5.bibliosoft.modelli.Libro;
-import gruppo5.bibliosoft.servizi.InterfacciaServizioLibri;
+import gruppo5.bibliosoft.servizi.ServizioLibri;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,10 +37,10 @@ public class ControllerLibri {
     @FXML
     private TableColumn<Libro, Integer> colCopieDisp;
 
-    private InterfacciaServizioLibri servizioLibri;
+    private ServizioLibri servizioLibri;
     private final ObservableList<Libro> dati = FXCollections.observableArrayList();
 
-    public void impostaServizi(InterfacciaServizioLibri servizioLibri) {
+    public void impostaServizi(ServizioLibri servizioLibri) {
         this.servizioLibri = servizioLibri;
         inizializzaTabella();
         aggiorna();
@@ -64,7 +65,7 @@ public class ControllerLibri {
     @FXML
     private void onRicerca() {
         String filtro = campoRicerca.getText();
-        List<Libro> risultati = servizioLibri.cerca(filtro);
+        List<Libro> risultati = servizioLibri.cercaLibri(FiltroLibro.ricerca(filtro));
         dati.setAll(risultati);
     }
 

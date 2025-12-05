@@ -14,21 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ServizioArchivio implements InterfacciaServizioArchivio {
+public class ServizioArchivio{
 
     private final String fileArchivio;
-    private final ArchivioLibri archivioLibri;
-    private final ArchivioUtenti archivioUtenti;
-    private final ArchivioPrestiti archivioPrestiti;
+    private final Archivio archivio;
 
     public ServizioArchivio(String fileArchivio,
-            ArchivioLibri archivioLibri,
-            ArchivioUtenti archivioUtenti,
-            ArchivioPrestiti archivioPrestiti) {
+            Archivio archivio) {
         this.fileArchivio = fileArchivio;
-        this.archivioLibri = archivioLibri;
-        this.archivioUtenti = archivioUtenti;
-        this.archivioPrestiti = archivioPrestiti;
+        this.archivio = archivio;
     }
 
     @SuppressWarnings("unchecked")
@@ -45,23 +39,23 @@ public class ServizioArchivio implements InterfacciaServizioArchivio {
             List<Prestito> prestiti = (List<Prestito>) root.get("prestiti");
             if (libri != null)
                 for(Libro libro : libri)
-                    archivioLibri.aggiungi(libro);
+                    archivio.aggiungiLibro(libro);
             
             if (utenti != null)
                 for(Utente utente : utenti)
-                    archivioUtenti.aggiungi(utente);
+                    archivio.aggiungiUtente(utente);
             
             if (prestiti != null)
                 for(Prestito prestito : prestiti)
-                    archivioPrestiti.aggiungi(prestito);
+                    archivio.aggiungiPrestito(prestito);
         }
     }
 
     public void salva() throws IOException {
         Map<String, Object> root = new HashMap<>();
-        root.put("libri", archivioLibri.lista());
-        root.put("utenti", archivioUtenti.lista());
-        root.put("prestiti", archivioPrestiti.lista());
+        root.put("libri", archivio.listaLibri());
+        root.put("utenti", archivio.listaUtenti());
+        root.put("prestiti", archivio.listaPrestiti());
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileArchivio))) {
             oos.writeObject(root);
         }

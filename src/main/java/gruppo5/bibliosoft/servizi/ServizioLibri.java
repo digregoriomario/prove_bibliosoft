@@ -1,70 +1,79 @@
 package gruppo5.bibliosoft.servizi;
 
-import gruppo5.bibliosoft.archivi.ArchivioLibri;
+import gruppo5.bibliosoft.archivi.Archivio;
 import gruppo5.bibliosoft.modelli.Libro;
 import gruppo5.bibliosoft.archivi.filtri.FiltroLibro;
+import gruppo5.bibliosoft.archivi.filtri.InterfacciaFiltro;
 import gruppo5.bibliosoft.strumenti.*;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ServizioLibri implements InterfacciaServizioLibri {
+public class ServizioLibri{
+    private final Archivio archivio;
 
-    private final ArchivioLibri archivioLibri;
-
-    public ServizioLibri(ArchivioLibri archivioLibri) {
-        this.archivioLibri = archivioLibri;
+    public ServizioLibri(Archivio archivio) {
+        this.archivio = archivio;
     }
+
 
     public void aggiungiLibro(Libro libro) {
         Validatore.validaLibro(libro);
-        if(! archivioLibri.cerca(FiltroLibro.ricerca(libro.getIsbn())).isEmpty())
+        if (!archivio.cercaLibri(FiltroLibro.ricerca(libro.getIsbn())).isEmpty()) {
             throw new IllegalArgumentException("ISBN già presente");
-        
-        archivioLibri.aggiungi(libro);
+        }
+
+        archivio.aggiungiLibro(libro);
     }
+
 
     public void modificaLibro(Libro libro) {
         Validatore.validaLibro(libro);
-        archivioLibri.modifica(libro);
+        archivio.modificaLibro(libro);
     }
+
 
     public void eliminaLibro(Libro libro) {
         if (!libro.isDisponibile()) {
             throw new IllegalStateException("Impossibile eliminare: libro in prestito o senza copie disponibili");
         }
-        archivioLibri.rimuovi(libro);
+        archivio.rimuoviLibro(libro);
     }
 
     public List<Libro> listaLibri() {
-        return archivioLibri.lista();
+        return archivio.listaLibri();
     }
 
-    public List<Libro> cerca(String filtro) {
-        if (filtro == null || filtro.isBlank())
+
+    public List<Libro> cercaLibri(InterfacciaFiltro<Libro> filtro) {
+        if (filtro == null) {
             return listaLibri();
-        
-        return archivioLibri.cerca(FiltroLibro.ricerca(filtro));
+        }
+
+        return archivio.cercaLibri(filtro);
     }
-    
-    public int getLibriTotali(){
-        return archivioLibri.contaElementi();
+
+    public int getLibriTotali() {
+        return archivio.contaLibri();
     }
-    
-    public int getCopieTotali(){
+
+    public int getCopieTotali() {
         int contatore = 0;
-        for(Libro libro : archivioLibri.lista())
+        for (Libro libro : archivio.listaLibri()) {
             contatore += libro.getCopieTotali();
-        
+        }
+
         return contatore;
     }
-    
-        public int getCopieDisponibili(){
+
+    public int getCopieDisponibili() {
         int contatore = 0;
-        for(Libro libro : archivioLibri.lista())
+        for (Libro libro : archivio.listaLibri()) {
             contatore += libro.getCopieDisponibili();
-        
+        }
+
         return contatore;
     }
+
 }

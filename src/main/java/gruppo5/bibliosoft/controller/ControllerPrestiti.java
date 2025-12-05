@@ -54,13 +54,13 @@ public class ControllerPrestiti {
     @FXML
     private Button bottoneTutti;
 
-    private InterfacciaServizioPrestiti servizioPrestiti;
+    private ServizioPrestiti servizioPrestiti;
     private ServizioUtenti servizioUtenti;
     private ServizioLibri servizioLibri;
 
     private final ObservableList<Prestito> datiPrestiti = FXCollections.observableArrayList();
 
-    public void impostaServizi(InterfacciaServizioPrestiti servizioPrestiti,
+    public void impostaServizi(ServizioPrestiti servizioPrestiti,
             ServizioUtenti servizioUtenti,
             ServizioLibri servizioLibri) {
         this.servizioPrestiti = servizioPrestiti;

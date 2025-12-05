@@ -10,24 +10,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class ServizioPrestiti implements InterfacciaServizioPrestiti {
-    private final ArchivioPrestiti archivioPrestiti;
-    private final ArchivioLibri archivioLibri;
-    private final ArchivioUtenti archivioUtenti;
+public class ServizioPrestiti{
+    private final Archivio archivio;
 
-    public ServizioPrestiti(ArchivioPrestiti archivioPrestiti,
-                           ArchivioLibri archivioLibri,
-                           ArchivioUtenti archivioUtenti) {
-        this.archivioPrestiti = archivioPrestiti;
-        this.archivioLibri = archivioLibri;
-        this.archivioUtenti = archivioUtenti;
+    public ServizioPrestiti(Archivio archivio) {
+        this.archivio = archivio;
     }
 
     public Prestito registraPrestito(Utente utente, Libro libro, LocalDate dataPrevista) {
         if (!libro.isDisponibile())
             throw new IllegalStateException("Copie non disponibili");
         
-        if(archivioPrestiti.cerca(FiltroPrestito.ricercaAttiviMatricola(utente.getMatricola())).size() >= 3) 
+        if(archivio.cercaPrestiti(FiltroPrestito.ricercaAttiviMatricola(utente.getMatricola())).size() >= 3) 
             throw new IllegalStateException("L'utente ha già 3 prestiti attivi");
         
 
@@ -36,7 +30,7 @@ public class ServizioPrestiti implements InterfacciaServizioPrestiti {
         
 
         Prestito prestito = new Prestito(utente, libro, LocalDate.now(), dataPrevista);
-        archivioPrestiti.aggiungi(prestito);
+        archivio.aggiungiPrestito(prestito);
 
         libro.setCopieDisponibili(libro.getCopieDisponibili() - 1);
         utente.aggiungiPrestito(prestito);
@@ -52,44 +46,44 @@ public class ServizioPrestiti implements InterfacciaServizioPrestiti {
         prestito.setStato(StatoPrestito.CONCLUSO);
         prestito.getLibro().setCopieDisponibili(prestito.getLibro().getCopieDisponibili() + 1);
         prestito.getUtente().rimuoviPrestito(prestito);
-        archivioPrestiti.modifica(prestito);
+        archivio.modificaPrestito(prestito);
     }
 
     public void aggiornaRitardi() {
         LocalDate oggi = LocalDate.now();
-        for(Prestito prestito : archivioPrestiti.cerca(FiltroPrestito.filtraAttivi())){
+        for(Prestito prestito : archivio.cercaPrestiti(FiltroPrestito.filtraAttivi())){
             prestito.aggiornaStato(oggi);
-            archivioPrestiti.modifica(prestito);
+            archivio.modificaPrestito(prestito);
         }
     }
 
     public List<Prestito> lista() {
         aggiornaRitardi();
-        return archivioPrestiti.lista();
+        return archivio.listaPrestiti();
         //List<Prestito> risultato =  archivioPrestiti.cerca(FiltroPrestito.filtraAttivi());
         //risultato.sort(null);   //se passo null ordinerà secondo l'ordine naturale (la sort teoricaemente è inutile)
         //return risultato;
     }
     
    public List<Prestito> cerca(InterfacciaFiltro<Prestito> filtro){
-       return archivioPrestiti.cerca(filtro);
+       return archivio.cercaPrestiti(filtro);
    }
 
     public List<Prestito> storico(Utente utente) {
-        List<Prestito> risultato =  archivioPrestiti.cerca(FiltroPrestito.ricercaMatricola(utente.getMatricola()));
+        List<Prestito> risultato =  archivio.cercaPrestiti(FiltroPrestito.ricercaMatricola(utente.getMatricola()));
         risultato.sort(null);   //se passo null ordinerà secondo l'ordine naturale (la sort teoricaemente è inutile)
         return risultato;
     }
     
     public int getPrestitiInRitardo(){
-        return archivioPrestiti.cerca(FiltroPrestito.filtraInRitardo()).size();
+        return archivio.cercaPrestiti(FiltroPrestito.filtraInRitardo()).size();
     }
     
     public int getPrestitiConclusi(){
-        return archivioPrestiti.cerca(FiltroPrestito.filtraConclusi()).size();
+        return archivio.cercaPrestiti(FiltroPrestito.filtraConclusi()).size();
     }
     
     public int getPrestitiInCorso(){
-        return archivioPrestiti.cerca(FiltroPrestito.filtraInCorso()).size();
+        return archivio.cercaPrestiti(FiltroPrestito.filtraInCorso()).size();
     }
 }

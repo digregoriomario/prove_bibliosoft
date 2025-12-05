@@ -21,15 +21,14 @@ public class Bibliosoft extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         //instanzio gli archivi:
-        ArchivioLibri archivioLibri = new ArchivioLibri();
-        ArchivioUtenti archivioUtenti = new ArchivioUtenti();
-        ArchivioPrestiti archivioPrestiti = new ArchivioPrestiti();
+        Archivio archivio = new Archivio();
+       
 
         //istanzio i servizi:
-        ServizioLibri servizioLibri = new ServizioLibri(archivioLibri);
-        ServizioUtenti servizioUtenti = new ServizioUtenti(archivioUtenti);
-        ServizioPrestiti servizioPrestiti = new ServizioPrestiti(archivioPrestiti, archivioLibri, archivioUtenti);
-        ServizioArchivio servizioArchivio = new ServizioArchivio("archivio.dat", archivioLibri, archivioUtenti, archivioPrestiti);
+        ServizioLibri servizioLibri = new ServizioLibri(archivio);
+        ServizioUtenti servizioUtenti = new ServizioUtenti(archivio);
+        ServizioPrestiti servizioPrestiti = new ServizioPrestiti(archivio);
+        ServizioArchivio servizioArchivio = new ServizioArchivio("archivio.dat", archivio);
 
         /*servizioLibri.aggiungiLibro(new Libro("9788845292619", "Il Signore degli Anelli",
                 List.of("J. R. R. Tolkien"), 1954, 10));

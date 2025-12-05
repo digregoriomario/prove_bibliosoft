@@ -1,46 +1,97 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package gruppo5.bibliosoft.archivi;
 
-import gruppo5.bibliosoft.archivi.filtri.*;
-
-import java.util.ArrayList;
+import gruppo5.bibliosoft.archivi.filtri.InterfacciaFiltro;
+import gruppo5.bibliosoft.modelli.*;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
-public abstract class Archivio<T> implements InterfacciaArchivio<T> {   //archivio implementa l'interfaccia archivio
-    protected Set<T> elementi = new TreeSet<>();    //il tree set organizza gli elementi in base a un criterio di ordinamento (da creare)
+/**
+ *
+ * @author mariodigregorio
+ */
+public class Archivio{
+    private final ArchivioClassico<Libro> libri = new ArchivioClassico<>();
+    private final ArchivioClassico<Utente> utenti = new ArchivioClassico<>();
+    private final ArchivioClassico<Prestito> prestiti = new ArchivioClassico<>();
     
-    @Override
-    public void aggiungi(T elemento){   //metodo che aggiunge un elemento alla collezzione
-        elementi.add(elemento);
+    
+    //Gestione libri:
+    public void aggiungiLibro(Libro libro){
+        libri.aggiungi(libro);
     }
     
-    @Override         
-    public void rimuovi(T elemento){    //metodo che rimuove un elemento dalla collezzione
-        elementi.remove(elemento);
+    public void modificaLibro(Libro libro){
+        libri.modifica(libro);
     }
     
-    @Override
-    public List<T> cerca(InterfacciaFiltro<T> filtro){ //funzione che restituisce una lista filtrata in base a un filtro
-        if(filtro == null)  //se il filtro è null, allora restuisco l'intera lista (non filtrata)
-            return lista();
-        
-        List<T> risultati = new ArrayList<>();  //creo una lista per il risultato della ricerca
-        
-        for(T elemento : elementi)  //per ogni elemento della collezzione...
-            if(filtro.filtra(elemento))  //controllo se rispetta il filtro
-                risultati.add(elemento);    //lo aggiungo alla lista dei risultati
-        
-        return risultati;   //restituisco i risultati
+    public void rimuoviLibro(Libro libro){
+        libri.rimuovi(libro);
     }
     
-    @Override
-    public List<T> lista(){ //funzione che restuisce la lista degli elementi
-        return new ArrayList<>(elementi);   //restituisco la lista degli elementi
+    public List<Libro> listaLibri(){
+        return libri.lista();
     }
     
-    @Override
-    public int contaElementi(){
-        return elementi.size();
+    public List<Libro> cercaLibri(InterfacciaFiltro<Libro> filtro){
+        return libri.cerca(filtro);
+    }
+    
+    public int contaLibri(){
+        return libri.conta();
+    }
+    
+    
+    //Gestione utenti:
+    public void aggiungiUtente(Utente utente){
+        utenti.aggiungi(utente);
+    }
+    
+    public void modificaUtente(Utente utente){
+        utenti.modifica(utente);
+    }
+    
+    public void rimuoviUtente(Utente utente){
+        utenti.rimuovi(utente);
+    }
+    
+    public List<Utente> listaUtenti(){
+        return utenti.lista();
+    }
+    
+    public List<Utente> cercaUtenti(InterfacciaFiltro<Utente> filtro){
+        return utenti.cerca(filtro);
+    }
+    
+    public int contaUtenti(){
+        return utenti.conta();
+    }
+    
+    
+    //Gestione prestiti:
+    public void aggiungiPrestito(Prestito prestito){
+        prestiti.aggiungi(prestito);
+    }
+    
+    public void modificaPrestito(Prestito prestito){
+        prestiti.modifica(prestito);
+    }
+    
+    public void rimuoviPrestito(Prestito prestito){
+        prestiti.rimuovi(prestito);
+    }
+    
+    public List<Prestito> listaPrestiti(){
+        return prestiti.lista();
+    }
+    
+    public List<Prestito> cercaPrestiti(InterfacciaFiltro<Prestito> filtro){
+        return prestiti.cerca(filtro);
+    }
+    
+    public int contaPrestiti(){
+        return prestiti.conta();
     }
 }

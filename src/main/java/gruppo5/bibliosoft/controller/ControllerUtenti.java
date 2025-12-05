@@ -26,11 +26,11 @@ public class ControllerUtenti {
     @FXML private TableColumn<Utente, String> colEmail;
     @FXML private TableColumn<Utente, Number> colPrestiti;
 
-    private InterfacciaServizioUtenti servizioUtenti;
-    private InterfacciaServizioPrestiti servizioPrestiti;
+    private ServizioUtenti servizioUtenti;
+    private ServizioPrestiti servizioPrestiti;
     private final ObservableList<Utente> dati = FXCollections.observableArrayList();
 
-    public void impostaServizi(InterfacciaServizioUtenti servizioUtenti, ServizioPrestiti servizioPrestiti) {
+    public void impostaServizi(ServizioUtenti servizioUtenti, ServizioPrestiti servizioPrestiti) {
         this.servizioUtenti = servizioUtenti;
         this.servizioPrestiti = servizioPrestiti;
         inizializzaTabella();
