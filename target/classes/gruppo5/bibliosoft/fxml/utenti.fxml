@@ -21,7 +21,7 @@
     <children>
         <HBox alignment="CENTER_LEFT" spacing="10">
             <children>
-                <TextField fx:id="campoRicerca" prefHeight="35.0" prefWidth="300" promptText="Cerca utente..." />
+                <TextField fx:id="campoRicerca" prefHeight="35.0" prefWidth="300" promptText="Cerca per cognome o matricola..." />
                 <Button onAction="#onRicerca" prefHeight="35.0" prefWidth="60.0" styleClass="primary-button" text="Cerca" />
                 <Pane HBox.hgrow="ALWAYS" />
                 <Button onAction="#onAggiungi" text="Nuovo Utente" />

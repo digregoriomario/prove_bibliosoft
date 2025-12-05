@@ -60,9 +60,6 @@ public class ServizioPrestiti{
     public List<Prestito> lista() {
         aggiornaRitardi();
         return archivio.listaPrestiti();
-        //List<Prestito> risultato =  archivioPrestiti.cerca(FiltroPrestito.filtraAttivi());
-        //risultato.sort(null);   //se passo null ordinerà secondo l'ordine naturale (la sort teoricaemente è inutile)
-        //return risultato;
     }
     
    public List<Prestito> cerca(InterfacciaFiltro<Prestito> filtro){
@@ -70,9 +67,7 @@ public class ServizioPrestiti{
    }
 
     public List<Prestito> storico(Utente utente) {
-        List<Prestito> risultato =  archivio.cercaPrestiti(FiltroPrestito.ricercaMatricola(utente.getMatricola()));
-        risultato.sort(null);   //se passo null ordinerà secondo l'ordine naturale (la sort teoricaemente è inutile)
-        return risultato;
+        return  archivio.cercaPrestiti(FiltroPrestito.ricercaMatricola(utente.getMatricola()));
     }
     
     public int getPrestitiInRitardo(){

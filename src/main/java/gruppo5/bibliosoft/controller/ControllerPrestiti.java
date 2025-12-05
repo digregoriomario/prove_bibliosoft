@@ -104,7 +104,7 @@ public class ControllerPrestiti {
                 switch (item) {
                     case IN_RITARDO ->
                         setStyle("-fx-text-fill: red;");
-                        
+
                     case IN_CORSO ->
                         setStyle("-fx-text-fill: orange;");
 
@@ -160,11 +160,12 @@ public class ControllerPrestiti {
 
     public void pulisciCampi() {
         comboUtente.getSelectionModel().clearSelection();
+        comboUtente.setValue(null);
+
         comboLibro.getSelectionModel().clearSelection();
-        comboUtente.setPromptText("Seleziona utente");
-        comboLibro.setPromptText("Seleziona libro");
+        comboLibro.setValue(null);
+
         dataPrevista.setValue(null);
-        dataPrevista.setPromptText("Data di restituzione prevista");
     }
 
     @FXML

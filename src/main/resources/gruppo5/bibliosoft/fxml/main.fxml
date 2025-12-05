@@ -23,7 +23,7 @@
     <center>
         <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab fx:id="tabPannelloDiControllo" text="Dashboard" />
+                <Tab fx:id="tabPannelloDiControllo" text="Pannello di controllo" />
                 <Tab fx:id="tabLibri" onSelectionChanged="#cambioTab" text="Libri" />
                 <Tab fx:id="tabUtenti" onSelectionChanged="#cambioTab" text="Utenti" />
                 <Tab fx:id="tabPrestiti" onSelectionChanged="#cambioTab" text="Prestiti" />
