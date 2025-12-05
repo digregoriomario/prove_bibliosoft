@@ -17,6 +17,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.geometry.Insets;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class ControllerLibri {
 
@@ -125,6 +128,9 @@ public class ControllerLibri {
                 "Vuoi davvero eliminare il libro selezionato?",
                 ButtonType.YES, ButtonType.NO);
         alert.setHeaderText("Conferma eliminazione");
+        alert.getDialogPane().getStylesheets().add(
+                getClass().getResource("/gruppo5/bibliosoft/css/stile_viste.css").toExternalForm()
+        );
         alert.showAndWait().ifPresent(bt -> {
             if (bt == ButtonType.YES) {
                 try {
@@ -143,64 +149,91 @@ public class ControllerLibri {
     }
 
     private Dialog<Libro> creaDialogLibro(Libro iniziale) {
-        Dialog<Libro> finestraDialog = new Dialog<>();
-        finestraDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+    Dialog<Libro> finestraDialog = new Dialog<>();
+    finestraDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+    finestraDialog.getDialogPane().getStylesheets().add(
+            getClass().getResource("/gruppo5/bibliosoft/css/stile_viste.css").toExternalForm()
+    );
 
-        TextField isbnField = new TextField();
-        TextField titoloField = new TextField();
-        TextField autoriField = new TextField();
-        TextField annoField = new TextField();
-        TextField copieField = new TextField();
+    TextField isbnField = new TextField();
+    TextField titoloField = new TextField();
+    TextField autoriField = new TextField();
+    TextField annoField = new TextField();
+    TextField copieField = new TextField();
 
-        if (iniziale != null) {
-            isbnField.setText(iniziale.getIsbn());
-            isbnField.setDisable(true);
-            titoloField.setText(iniziale.getTitolo());
-            autoriField.setText(String.join(", ", iniziale.getAutori()));
-            annoField.setText(String.valueOf(iniziale.getAnnoPubblicazione()));
-            copieField.setText(String.valueOf(iniziale.getCopieTotali()));
-        }
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-
-        grid.add(new Label("ISBN:"), 0, 0);
-        grid.add(isbnField, 1, 0);
-        grid.add(new Label("Titolo:"), 0, 1);
-        grid.add(titoloField, 1, 1);
-        grid.add(new Label("Autori (separati da ,):"), 0, 2);
-        grid.add(autoriField, 1, 2);
-        grid.add(new Label("Anno:"), 0, 3);
-        grid.add(annoField, 1, 3);
-        grid.add(new Label("Copie totali:"), 0, 4);
-        grid.add(copieField, 1, 4);
-
-        finestraDialog.getDialogPane().setContent(grid);
-
-        finestraDialog.setResultConverter(bt -> {
-            if (bt == ButtonType.OK) {
-                try {
-                    String isbn = isbnField.getText();
-                    String titolo = titoloField.getText();
-                    List<String> autori = Arrays.asList(autoriField.getText().split("\s*,\s*"));
-                    int anno = Integer.parseInt(annoField.getText());
-                    int copie = Integer.parseInt(copieField.getText());
-                    return new Libro(isbn, titolo, autori, anno, copie);
-                } catch (Exception ex) {
-                    mostraErrore("Dati non validi: " + ex.getMessage());
-                    return null;
-                }
-            }
-            return null;
-        });
-
-        return finestraDialog;
+    if (iniziale != null) {
+        isbnField.setText(iniziale.getIsbn());
+        isbnField.setDisable(true);
+        titoloField.setText(iniziale.getTitolo());
+        autoriField.setText(String.join(", ", iniziale.getAutori()));
+        annoField.setText(String.valueOf(iniziale.getAnnoPubblicazione()));
+        copieField.setText(String.valueOf(iniziale.getCopieTotali()));
     }
+
+    VBox contenitore = new VBox(10);
+    contenitore.setPadding(new Insets(10, 20, 10, 20));
+
+    HBox rigaIsbn = new HBox(10);
+    Label labelIsbn = new Label("ISBN:");
+    labelIsbn.setMinWidth(150);
+    rigaIsbn.getChildren().addAll(labelIsbn, isbnField);
+
+    HBox rigaTitolo = new HBox(10);
+    Label labelTitolo = new Label("Titolo:");
+    labelTitolo.setMinWidth(150);
+    rigaTitolo.getChildren().addAll(labelTitolo, titoloField);
+
+    HBox rigaAutori = new HBox(10);
+    Label labelAutori = new Label("Autori (separati da ,):");
+    labelAutori.setMinWidth(150);
+    rigaAutori.getChildren().addAll(labelAutori, autoriField);
+
+    HBox rigaAnno = new HBox(10);
+    Label labelAnno = new Label("Anno:");
+    labelAnno.setMinWidth(150);
+    rigaAnno.getChildren().addAll(labelAnno, annoField);
+
+    HBox rigaCopie = new HBox(10);
+    Label labelCopie = new Label("Copie totali:");
+    labelCopie.setMinWidth(150);
+    rigaCopie.getChildren().addAll(labelCopie, copieField);
+
+    contenitore.getChildren().addAll(
+            rigaIsbn,
+            rigaTitolo,
+            rigaAutori,
+            rigaAnno,
+            rigaCopie
+    );
+
+    finestraDialog.getDialogPane().setContent(contenitore);
+
+    finestraDialog.setResultConverter(bt -> {
+        if (bt == ButtonType.OK) {
+            try {
+                String isbn = isbnField.getText();
+                String titolo = titoloField.getText();
+                List<String> autori = Arrays.asList(autoriField.getText().split("\\\\s*,\\\\s*"));
+                int anno = Integer.parseInt(annoField.getText());
+                int copie = Integer.parseInt(copieField.getText());
+                return new Libro(isbn, titolo, autori, anno, copie);
+            } catch (Exception ex) {
+                mostraErrore("Dati non validi: " + ex.getMessage());
+                return null;
+            }
+        }
+        return null;
+    });
+
+    return finestraDialog;
+}
 
     private void mostraErrore(String messaggio) {
         Alert alert = new Alert(Alert.AlertType.ERROR, messaggio, ButtonType.OK);
         alert.setHeaderText("Errore");
+        alert.getDialogPane().getStylesheets().add(
+                getClass().getResource("/gruppo5/bibliosoft/css/stile_viste.css").toExternalForm()
+        );
         alert.showAndWait();
     }
 

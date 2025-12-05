@@ -1,6 +1,5 @@
 package gruppo5.bibliosoft.controller;
 
-import gruppo5.bibliosoft.archivi.filtri.FiltroPrestito;
 import gruppo5.bibliosoft.servizi.*;
 
 import java.io.IOException;
@@ -37,7 +36,7 @@ public class ControllerPrincipale {
     private ServizioUtenti servizioUtenti;
     private ServizioPrestiti servizioPrestiti;
     private ServizioArchivio servizioArchivio;
-    
+
     private ControllerPannelloControllo controllerPannelloControllo;
     private ControllerLibri controllerLibri;
     private ControllerUtenti controllerUtenti;
@@ -62,7 +61,7 @@ public class ControllerPrincipale {
         caricaVistaUtenti();
         caricaVistaPrestiti();
     }
-    
+
     private void caricaVistaPannelloDiControllo() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gruppo5/bibliosoft/fxml/pannello_di_controllo.fxml"));
@@ -112,8 +111,9 @@ public class ControllerPrincipale {
     }
 
     public void aggiornaTutto() {
-        if(controllerPannelloControllo != null) 
+        if (controllerPannelloControllo != null) {
             controllerPannelloControllo.aggiorna();
+        }
         if (controllerLibri != null) {
             controllerLibri.aggiorna();
         }
@@ -130,12 +130,18 @@ public class ControllerPrincipale {
         try {
             servizioArchivio.salva();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.getDialogPane().getStylesheets().add(
+                    getClass().getResource("/gruppo5/bibliosoft/css/stile_viste.css").toExternalForm()
+            );
             alert.setHeaderText("Salvataggio completato con successo");
             modificheEffettuate = false;
             alert.showAndWait();
         } catch (Exception ex) {
             ex.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Errore durante il salvataggio.");
+            alert.getDialogPane().getStylesheets().add(
+                    getClass().getResource("/gruppo5/bibliosoft/css/stile_viste.css").toExternalForm()
+            );
             alert.setHeaderText("Errore");
             alert.showAndWait();
         }
@@ -147,8 +153,13 @@ public class ControllerPrincipale {
             Alert alert = new Alert(
                     Alert.AlertType.CONFIRMATION,
                     "Ci sono modifiche non salvate. Vuoi salvare prima di uscire?",
-                    ButtonType.CANCEL,  ButtonType.NO, ButtonType.YES
+                    ButtonType.CANCEL, ButtonType.NO, ButtonType.YES
             );
+
+            alert.getDialogPane().getStylesheets().add(
+                    getClass().getResource("/gruppo5/bibliosoft/css/stile_viste.css").toExternalForm()
+            );
+
             alert.setHeaderText("Conferma chiusura");
             alert.initModality(Modality.APPLICATION_MODAL);
 
@@ -162,10 +173,12 @@ public class ControllerPrincipale {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            } else if (result.isPresent() && result.get() == ButtonType.NO)
+            } else if (result.isPresent() && result.get() == ButtonType.NO) {
                 root.getScene().getWindow().hide();
-            
-        } else
+            }
+
+        } else {
             root.getScene().getWindow().hide();
+        }
     }
 }

@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import gruppo5.bibliosoft.archivi.filtri.InterfacciaFiltro;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 
 public class ControllerPrestiti {
 
@@ -86,6 +87,34 @@ public class ControllerPrestiti {
                 -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getDataRestituzioneEffettiva()));
         colStato.setCellValueFactory(c
                 -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getStato()));
+        colStato.setCellFactory(col -> new TableCell<Prestito, StatoPrestito>() {
+            @Override
+            protected void updateItem(StatoPrestito item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                    return;
+                }
+
+                setText(item.toString());
+                setStyle("");
+
+                switch (item) {
+                    case IN_RITARDO ->
+                        setStyle("-fx-text-fill: red;");
+                        
+                    case IN_CORSO ->
+                        setStyle("-fx-text-fill: orange;");
+
+                    case CONCLUSO ->
+                        setStyle("-fx-text-fill: green;");
+
+                }
+            }
+        });
+
         tabellaPrestiti.setPlaceholder(new Label("Nessun prestito presente"));
 
         tabellaPrestiti.setItems(datiPrestiti);
@@ -132,7 +161,10 @@ public class ControllerPrestiti {
     public void pulisciCampi() {
         comboUtente.getSelectionModel().clearSelection();
         comboLibro.getSelectionModel().clearSelection();
+        comboUtente.setPromptText("Seleziona utente");
+        comboLibro.setPromptText("Seleziona libro");
         dataPrevista.setValue(null);
+        dataPrevista.setPromptText("Data di restituzione prevista");
     }
 
     @FXML
@@ -170,11 +202,12 @@ public class ControllerPrestiti {
     }
 
     public void aggiorna() {
+
         servizioPrestiti.aggiornaRitardi();
         datiPrestiti.setAll(servizioPrestiti.cerca(filtroCorrente));
-        //tabellaPrestiti.refresh();
         aggiornaCombo();
         pulisciCampi();
+
         dataPrevista.setDayCellFactory(dp -> new DateCell() {
             @Override
             public void updateItem(LocalDate elemento, boolean vuoto) {
@@ -191,6 +224,9 @@ public class ControllerPrestiti {
     private void mostraErrore(String messaggio) {
         Alert alert = new Alert(Alert.AlertType.ERROR, messaggio, ButtonType.OK);
         alert.setHeaderText("Errore");
+        alert.getDialogPane().getStylesheets().add(
+                getClass().getResource("/gruppo5/bibliosoft/css/stile_viste.css").toExternalForm()
+        );
         alert.showAndWait();
     }
 }

@@ -3,15 +3,8 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppo5.bibliosoft.controller.ControllerPrincipale">
+<BorderPane fx:id="root" stylesheets="@../css/stile_principale.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppo5.bibliosoft.controller.ControllerPrincipale">
 
     <top>
         <MenuBar>
@@ -28,12 +21,12 @@
     </top>
 
     <center>
-        <TabPane fx:id="tabPane">
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-            <Tab fx:id="tabPannelloDiControllo" closable="false" text="Pannello di controllo" />
-                <Tab fx:id="tabLibri" closable="false" onSelectionChanged="#cambioTab" text="Libri" />
-                <Tab fx:id="tabUtenti" closable="false" onSelectionChanged="#cambioTab" text="Utenti" />
-                <Tab fx:id="tabPrestiti" closable="false" onSelectionChanged="#cambioTab" text="Prestiti" />
+                <Tab fx:id="tabPannelloDiControllo" text="Dashboard" />
+                <Tab fx:id="tabLibri" onSelectionChanged="#cambioTab" text="Libri" />
+                <Tab fx:id="tabUtenti" onSelectionChanged="#cambioTab" text="Utenti" />
+                <Tab fx:id="tabPrestiti" onSelectionChanged="#cambioTab" text="Prestiti" />
             </tabs>
         </TabPane>
     </center>

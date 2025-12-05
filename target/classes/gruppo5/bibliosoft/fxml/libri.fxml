@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,32 +14,38 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppo5.bibliosoft.controller.ControllerLibri">
+<VBox spacing="20" stylesheets="@../css/stile_viste.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppo5.bibliosoft.controller.ControllerLibri">
     <padding>
-        <Insets bottom="10" left="10" right="10" top="10" />
+        <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
     <children>
-        <HBox spacing="5">
+        <HBox alignment="CENTER_LEFT" spacing="10">
             <children>
-                <Label text="Ricerca:" />
-                <TextField fx:id="campoRicerca" promptText="Titolo, autore o ISBN" />
-                <Button onAction="#onRicerca" styleClass="primary-button" text="Trova" />
+                <TextField fx:id="campoRicerca" prefHeight="35.0" prefWidth="300" promptText="Cerca per titolo, autore o ISBN..." />
+                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onRicerca" prefHeight="35.0" prefWidth="60.0" styleClass="primary-button" text="Cerca" />
                 <Pane HBox.hgrow="ALWAYS" />
-                <Button onAction="#onAggiungi" text="Nuovo" />
+                <Button onAction="#onAggiungi" text="Nuovo Libro" />
                 <Button onAction="#onModifica" text="Modifica" />
                 <Button onAction="#onElimina" styleClass="danger-button" text="Elimina" />
             </children>
         </HBox>
 
-        <TableView fx:id="tabellaLibri" VBox.vgrow="ALWAYS">
-            <columns>
-                <TableColumn fx:id="colIsbn" prefWidth="120" text="ISBN" />
-                <TableColumn fx:id="colTitolo" prefWidth="220" text="Titolo" />
-                <TableColumn fx:id="colAutori" prefWidth="180" text="Autori" />
-                <TableColumn fx:id="colAnno" prefWidth="80" text="Anno" />
-                <TableColumn fx:id="colCopieTot" prefWidth="70" text="Totali" />
-                <TableColumn fx:id="colCopieDisp" prefWidth="70" text="Disp." />
-            </columns>
-        </TableView>
+        <VBox styleClass="card" VBox.vgrow="ALWAYS">
+            <children>
+                <TableView fx:id="tabellaLibri" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colIsbn" prefWidth="130" text="ISBN" />
+                        <TableColumn fx:id="colTitolo" prefWidth="250" text="Titolo" />
+                        <TableColumn fx:id="colAutori" prefWidth="200" text="Autori" />
+                        <TableColumn fx:id="colAnno" prefWidth="80" text="Anno" />
+                        <TableColumn fx:id="colCopieTot" prefWidth="80" text="Totali" />
+                        <TableColumn fx:id="colCopieDisp" prefWidth="80" text="Disp." />
+                    </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+                </TableView>
+            </children>
+        </VBox>
     </children>
 </VBox>

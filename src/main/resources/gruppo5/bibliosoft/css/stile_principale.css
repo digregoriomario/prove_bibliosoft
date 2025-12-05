@@ -1,0 +1,28 @@
+/* Arrotondamento delle linguette */
+.tab-pane .tab {
+    -fx-background-radius: 5px 5px 0 0;  /* <- qui controlli quanto sono tonde sopra */
+}
+
+.tab-pane .tab:selected {
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-border-radius: 5px 5px 0 0;      /* se hai un bordo sulla tab attiva */
+}
+
+.tab-pane .tab .tab-label {
+    -fx-font-size: 20px;   /* <- cambia questo valore */
+}
+
+/* opzionale: se vuoi differenziare la tab selezionata */
+.tab-pane .tab:selected .tab-label {
+    -fx-font-size: 25px;
+}
+
+.tab-pane:focused,
+.tab-pane .tab:focused,
+.tab-pane .tab .focus-indicator,
+.tab-pane:focused .tab:selected .focus-indicator {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}

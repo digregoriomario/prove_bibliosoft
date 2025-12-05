@@ -1,0 +1,53 @@
+/* GLOBAL VARIABLES */
+* {
+    -fx-primary-color: #007AFF;       /* Apple Blue */
+    -fx-danger-color: #FF3B30;        /* Apple Red */
+    -fx-success-color: #34C759;       /* Apple Green */
+    -fx-bg-color: #F5F5F7;            /* Light Gray Background */
+    -fx-card-bg: #FFFFFF;             /* White Card */
+    -fx-text-color: #1D1D1F;          /* Almost Black */
+    -fx-text-secondary: #86868B;      /* Gray Text */
+    -fx-border-radius: 10px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: -fx-bg-color;
+    -fx-text-fill: -fx-text-color;
+}
+
+/* --- TITOLI E TESTI --- */
+#titolo {
+    -fx-font-size: 50px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -fx-text-color;
+}
+
+.sottotitolo {
+    -fx-font-size: 25px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -fx-text-secondary;
+    -fx-padding: 0 0 10 0;
+}
+
+.statistica {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-text-secondary;
+}
+
+.contatore {
+    -fx-font-size: 32px;
+    -fx-font-weight: 300; /* Apple style thin numbers */
+    -fx-text-fill: -fx-text-color;
+}
+
+/* --- CARDS (Contenitori bianchi) --- */
+.rettangolo{
+    -fx-background-color: -fx-card-bg;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);
+    -fx-padding: 20;
+}
