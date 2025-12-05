@@ -13,9 +13,9 @@ import java.util.List;
  * @author mariodigregorio
  */
 public class Archivio{
-    private final ArchivioClassico<Libro> libri = new ArchivioClassico<>();
-    private final ArchivioClassico<Utente> utenti = new ArchivioClassico<>();
-    private final ArchivioClassico<Prestito> prestiti = new ArchivioClassico<>();
+    private final Sottoarchivio<Libro> libri = new Sottoarchivio<>();
+    private final Sottoarchivio<Utente> utenti = new Sottoarchivio<>();
+    private final Sottoarchivio<Prestito> prestiti = new Sottoarchivio<>();
     
     
     //Gestione libri:

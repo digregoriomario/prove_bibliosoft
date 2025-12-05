@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ArchivioClassico<T> implements InterfacciaArchivio<T> {   //archivio implementa l'interfaccia archivio
+public class Sottoarchivio<T> implements InterfacciaSottoarchivio<T> {   //archivio implementa l'interfaccia archivio
     protected Set<T> elementi = new TreeSet<>();    //il tree set organizza gli elementi in base a un criterio di ordinamento (da creare)
     
     @Override
