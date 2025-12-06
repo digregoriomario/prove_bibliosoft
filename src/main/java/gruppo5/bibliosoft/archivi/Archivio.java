@@ -4,6 +4,7 @@
  */
 package gruppo5.bibliosoft.archivi;
 
+import gruppo5.bibliosoft.archivi.filtri.FiltroPrestito;
 import gruppo5.bibliosoft.archivi.filtri.InterfacciaFiltro;
 import gruppo5.bibliosoft.modelli.*;
 import java.util.List;
@@ -72,7 +73,7 @@ public class Archivio{
     
     //Gestione prestiti:
     public void aggiungiPrestito(Prestito prestito){
-        prestiti.aggiungi(prestito);
+        prestiti.aggiungi(prestito); 
     }
     
     public void modificaPrestito(Prestito prestito){

@@ -1,7 +1,7 @@
-gruppo5/bibliosoft/archivi/filtri/FiltroUtente.class
 gruppo5/bibliosoft/archivi/InterfacciaSottoarchivio.class
-gruppo5/bibliosoft/controller/ControllerPrestiti.class
+gruppo5/bibliosoft/archivi/filtri/FiltroUtente.class
 gruppo5/bibliosoft/archivi/Archivio.class
+gruppo5/bibliosoft/controller/ControllerPrestiti.class
 gruppo5/bibliosoft/archivi/Sottoarchivio.class
 gruppo5/bibliosoft/archivi/filtri/FiltroLibro.class
 gruppo5/bibliosoft/archivi/filtri/InterfacciaFiltro.class
@@ -11,11 +11,11 @@ gruppo5/bibliosoft/servizi/ServizioPrestiti.class
 module-info.class
 gruppo5/bibliosoft/strumenti/Validatore.class
 gruppo5/bibliosoft/modelli/Libro.class
-gruppo5/bibliosoft/controller/ControllerUtenti.class
 gruppo5/bibliosoft/controller/ControllerUtenti$1.class
+gruppo5/bibliosoft/controller/ControllerUtenti.class
 gruppo5/bibliosoft/controller/ControllerPrestiti$2.class
-gruppo5/bibliosoft/controller/ControllerPrestiti$3.class
 gruppo5/bibliosoft/archivi/filtri/FiltroPrestito.class
+gruppo5/bibliosoft/controller/ControllerPrestiti$3.class
 gruppo5/bibliosoft/controller/ControllerPannelloControllo.class
 gruppo5/bibliosoft/modelli/StatoPrestito.class
 gruppo5/bibliosoft/servizi/ServizioLibri.class

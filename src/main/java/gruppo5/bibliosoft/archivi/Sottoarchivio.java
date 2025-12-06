@@ -12,6 +12,8 @@ public class Sottoarchivio<T> implements InterfacciaSottoarchivio<T> {   //archi
     
     @Override
     public void aggiungi(T elemento){   //metodo che aggiunge un elemento alla collezzione
+        if(elementi.contains(elemento))
+            throw new IllegalArgumentException(elemento.getClass().getSimpleName() + " già presente");
         elementi.add(elemento);
     }
     

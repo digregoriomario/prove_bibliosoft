@@ -69,6 +69,10 @@ public class Libro implements Serializable, Comparable<Libro>{
     public boolean isDisponibile() {
         return copieDisponibili > 0;
     }
+    
+    public boolean haPrestitiAttivi(){
+        return copieDisponibili != copieTotali;
+    }
 
     @Override
     public String toString() {
@@ -87,7 +91,11 @@ public class Libro implements Serializable, Comparable<Libro>{
 
     @Override
     public int compareTo(Libro libro) {
-        return titolo.compareToIgnoreCase(libro.getTitolo());
+        if(isbn.compareToIgnoreCase(libro.getIsbn()) == 0)
+            return 0;
+        
+        int cmp = titolo.compareToIgnoreCase(libro.getTitolo());
+        return (cmp != 0)? cmp : isbn.compareToIgnoreCase(libro.getIsbn());
     }
     
         

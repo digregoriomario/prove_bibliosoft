@@ -119,10 +119,11 @@ public class ControllerLibri {
             mostraErrore("Seleziona un libro da eliminare.");
             return;
         }
-        if (selezionato.getCopieDisponibili() != selezionato.getCopieTotali()) {
-            mostraErrore("Alcune copie di questo libro sono in prestito.");
+        if (selezionato.haPrestitiAttivi()) {    //aggiunto prima (anche se presente nel servizioLibri) per mostrare prima l'errore
+            mostraErrore("Impossibile eliminare: libro in prestito o senza copie disponibili");
             return;
         }
+        
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Vuoi davvero eliminare il libro selezionato?",

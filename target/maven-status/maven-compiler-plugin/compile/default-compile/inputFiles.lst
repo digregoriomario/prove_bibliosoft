@@ -1,23 +1,23 @@
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/filtri/FiltroUtente.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/modelli/Utente.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerPrestiti.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/servizi/ServizioArchivio.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/servizi/ServizioUtenti.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/filtri/FiltroPrestito.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/Archivio.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/modelli/Prestito.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/Bibliosoft.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerLibri.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/filtri/InterfacciaFiltro.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/Sottoarchivio.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/module-info.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/servizi/ServizioLibri.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerPannelloControllo.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerUtenti.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/InterfacciaSottoarchivio.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerPrincipale.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/servizi/ServizioPrestiti.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/modelli/StatoPrestito.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/filtri/FiltroLibro.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/modelli/Libro.java
-/Users/mariodigregorio/Desktop/Università/Ingegneria del software/Bibiliosoft_f/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/strumenti/Validatore.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerPrestiti.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerPannelloControllo.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/Bibliosoft.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/filtri/InterfacciaFiltro.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/servizi/ServizioPrestiti.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/servizi/ServizioUtenti.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerUtenti.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/filtri/FiltroUtente.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/InterfacciaSottoarchivio.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/servizi/ServizioLibri.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/modelli/Prestito.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerLibri.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/strumenti/Validatore.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/Sottoarchivio.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/controller/ControllerPrincipale.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/filtri/FiltroLibro.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/servizi/ServizioArchivio.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/Archivio.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/modelli/Utente.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/modelli/StatoPrestito.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/module-info.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/archivi/filtri/FiltroPrestito.java
+/home/mario/Scrivania/prove_bibliosoft/src/main/java/gruppo5/bibliosoft/modelli/Libro.java

@@ -20,10 +20,6 @@ public class ServizioLibri{
 
     public void aggiungiLibro(Libro libro) {
         Validatore.validaLibro(libro);
-        if (!archivio.cercaLibri(FiltroLibro.ricerca(libro.getIsbn())).isEmpty()) {
-            throw new IllegalArgumentException("ISBN già presente");
-        }
-
         archivio.aggiungiLibro(libro);
     }
 
@@ -35,7 +31,7 @@ public class ServizioLibri{
 
 
     public void eliminaLibro(Libro libro) {
-        if (!libro.isDisponibile()) {
+        if (libro.haPrestitiAttivi()) {
             throw new IllegalStateException("Impossibile eliminare: libro in prestito o senza copie disponibili");
         }
         archivio.rimuoviLibro(libro);
@@ -44,7 +40,6 @@ public class ServizioLibri{
     public List<Libro> listaLibri() {
         return archivio.listaLibri();
     }
-
 
     public List<Libro> cercaLibri(InterfacciaFiltro<Libro> filtro) {
         if (filtro == null) {

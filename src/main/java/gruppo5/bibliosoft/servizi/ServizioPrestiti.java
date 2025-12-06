@@ -17,16 +17,12 @@ public class ServizioPrestiti{
         this.archivio = archivio;
     }
 
-    public Prestito registraPrestito(Utente utente, Libro libro, LocalDate dataPrevista) {
-        if (!libro.isDisponibile())
+    public void registraPrestito(Utente utente, Libro libro, LocalDate dataPrevista) {
+        if(!libro.isDisponibile())
             throw new IllegalStateException("Copie non disponibili");
         
         if(archivio.cercaPrestiti(FiltroPrestito.ricercaAttiviMatricola(utente.getMatricola())).size() >= 3) 
             throw new IllegalStateException("L'utente ha già 3 prestiti attivi");
-        
-
-        if (!dataPrevista.isAfter(LocalDate.now()))
-            throw new IllegalArgumentException("La data di restituzione deve essere futura");
         
 
         Prestito prestito = new Prestito(utente, libro, LocalDate.now(), dataPrevista);
@@ -34,13 +30,11 @@ public class ServizioPrestiti{
 
         libro.setCopieDisponibili(libro.getCopieDisponibili() - 1);
         utente.aggiungiPrestito(prestito);
-        return prestito;
     }
 
     public void registraRestituzione(Prestito prestito) {
         if (prestito.getStato() == StatoPrestito.CONCLUSO)
             throw new IllegalStateException("Prestito concluso");
-            //return;
 
         prestito.setDataRestituzioneEffettiva(LocalDate.now());
         prestito.setStato(StatoPrestito.CONCLUSO);

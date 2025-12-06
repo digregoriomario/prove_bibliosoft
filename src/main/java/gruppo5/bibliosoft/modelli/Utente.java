@@ -54,11 +54,14 @@ public class Utente implements Serializable, Comparable<Utente>{
 
     @Override
     public int compareTo(Utente utente) {
-        int temp = nome.compareToIgnoreCase(utente.getNome());
-        if(temp != 0)
-            return temp;
+        if(matricola.compareToIgnoreCase(utente.getMatricola()) == 0)
+            return 0;
         
-        return cognome.compareToIgnoreCase(utente.getCognome());
+        if(email.compareToIgnoreCase(utente.getEmail()) == 0)
+            return 0;
+        
+        int cmp = cognome.compareToIgnoreCase(utente.getCognome());
+        cmp = (cmp != 0)? cmp : nome.compareToIgnoreCase(utente.getNome());
+        return (cmp != 0) ? cmp : matricola.compareToIgnoreCase(utente.getMatricola());
     }
-
 }

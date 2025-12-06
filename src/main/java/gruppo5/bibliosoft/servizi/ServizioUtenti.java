@@ -17,9 +17,6 @@ public class ServizioUtenti{
 
     public void aggiungiUtente(Utente utente) {
         Validatore.validaUtente(utente);
-        if(! archivio.cercaUtenti(FiltroUtente.ricercaMatricola(utente.getMatricola())).isEmpty())
-            throw new IllegalArgumentException("Matricola già presente");
-        
         archivio.aggiungiUtente(utente);
     }
 
