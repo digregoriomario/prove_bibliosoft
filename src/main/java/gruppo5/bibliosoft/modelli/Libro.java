@@ -89,4 +89,12 @@ public class Libro implements Serializable, Comparable<Libro>{
     public int compareTo(Libro libro) {
         return titolo.compareToIgnoreCase(libro.getTitolo());
     }
+    
+        
+    public boolean contieneAutore(String filtroAutore){
+        for(String autore : autori)
+            if(autore.toLowerCase().contains(filtroAutore.toLowerCase()))return true;
+        
+        return false;
+    }
 }

@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import gruppo5.bibliosoft.archivi.filtri.InterfacciaFiltro;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class ControllerPrestiti {
 
@@ -69,7 +70,7 @@ public class ControllerPrestiti {
 
         selezionaFiltro(bottoneAttivi);
         aggiorna();
-        
+
     }
 
     private void inizializzaTabella() {
@@ -85,6 +86,7 @@ public class ControllerPrestiti {
                 -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getDataRestituzioneEffettiva()));
         colStato.setCellValueFactory(c
                 -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getStato()));
+        tabellaPrestiti.setPlaceholder(new Label("Nessun prestito presente"));
 
         tabellaPrestiti.setItems(datiPrestiti);
     }

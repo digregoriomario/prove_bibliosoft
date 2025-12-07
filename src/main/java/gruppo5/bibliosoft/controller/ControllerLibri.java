@@ -56,6 +56,7 @@ public class ControllerLibri {
                 -> new javafx.beans.property.SimpleIntegerProperty(c.getValue().getCopieTotali()).asObject());
         colCopieDisp.setCellValueFactory(c
                 -> new javafx.beans.property.SimpleIntegerProperty(c.getValue().getCopieDisponibili()).asObject());
+        tabellaLibri.setPlaceholder(new Label("Nessun libro presente"));
 
         tabellaLibri.setItems(dati);
     }
@@ -114,6 +115,11 @@ public class ControllerLibri {
             mostraErrore("Seleziona un libro da eliminare.");
             return;
         }
+        if (selezionato.getCopieDisponibili() != selezionato.getCopieTotali()) {
+            mostraErrore("Alcune copie di questo libro sono in prestito.");
+            return;
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Vuoi davvero eliminare il libro selezionato?",
                 ButtonType.YES, ButtonType.NO);

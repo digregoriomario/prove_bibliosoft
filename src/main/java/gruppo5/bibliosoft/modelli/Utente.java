@@ -60,4 +60,5 @@ public class Utente implements Serializable, Comparable<Utente>{
         
         return cognome.compareToIgnoreCase(utente.getCognome());
     }
+
 }

@@ -13,6 +13,8 @@ public class FiltroUtente {
     public static InterfacciaFiltro<Utente> ricerca(String stringaFiltro) {
         return l -> l.getCognome().toLowerCase().contains(stringaFiltro.toLowerCase())
                 || l.getMatricola().contains(stringaFiltro);
+        
+                
     }
     
     public static InterfacciaFiltro<Utente> ricercaUtentiAttivi() {

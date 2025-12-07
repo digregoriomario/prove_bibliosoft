@@ -11,6 +11,7 @@ gruppo5/bibliosoft/strumenti/Validatore.class
 gruppo5/bibliosoft/servizi/InterfacciaServizioArchivio.class
 gruppo5/bibliosoft/modelli/Libro.class
 gruppo5/bibliosoft/controller/ControllerUtenti.class
+gruppo5/bibliosoft/controller/ControllerUtenti$1.class
 gruppo5/bibliosoft/archivi/filtri/FiltroPrestito.class
 gruppo5/bibliosoft/controller/ControllerPannelloControllo.class
 gruppo5/bibliosoft/archivi/ArchivioPrestiti.class

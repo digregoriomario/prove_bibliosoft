@@ -44,7 +44,7 @@ public class ControllerUtenti {
         colEmail.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getEmail()));
         colPrestiti.setCellValueFactory(c ->
                 new javafx.beans.property.SimpleIntegerProperty(c.getValue().getPrestitiAttivi().size()));
-
+        tabellaUtenti.setPlaceholder(new Label("Nessun utente presente"));
         tabellaUtenti.setItems(dati);
     }
     
@@ -100,6 +100,10 @@ public class ControllerUtenti {
             mostraErrore("Seleziona un utente.");
             return;
         }
+        if(selezionato.haPrestitiAttivi()){
+            mostraErrore("L'utente selezionato ha dei prestiti attivi");
+            return;
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                 "Vuoi davvero eliminare l'utente selezionato?",
                 ButtonType.YES, ButtonType.NO);
@@ -126,13 +130,33 @@ public class ControllerUtenti {
         }
         List<Prestito> storico = servizioPrestiti.storico(selezionato);
         StringBuilder sb = new StringBuilder();
-        storico.forEach(p -> sb.append(p.getLibro().getTitolo())
-                .append(" - Inizio: ").append(p.getDataInizio())
-                .append(" Prevista: ").append(p.getDataPrevista())
-                .append(" Stato: ").append(p.getStato())
-                .append("\n"));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,
-                sb.length() == 0 ? "Nessun prestito effettuato." : sb.toString());
+        //In corso, ritardo -> Titolo - Inzio - Prevista - Stato
+        //Concluso -> Titolo - Inzio - Prevista  - Effettiva - Stato
+        for(Prestito prestito : storico){
+            switch(prestito.getStato()){
+                case IN_CORSO: case IN_RITARDO:
+                    sb.append(prestito.getLibro().getTitolo())
+                    .append(" - Inizio: ").append(prestito.getDataInizio())
+                    .append(" Prevista: ").append(prestito.getDataPrevista())
+                    .append(" Stato: ").append(prestito.getStato())
+                    .append("\n\n");
+                    break;
+                    
+                case CONCLUSO:
+                    sb.append(prestito.getLibro().getTitolo())
+                    .append(" - Inizio: ").append(prestito.getDataInizio())
+                    .append(" Prevista: ").append(prestito.getDataPrevista())
+                    .append(" Effetiva: ").append(prestito. getDataRestituzioneEffettiva())
+                    .append(" Stato: ").append(prestito.getStato())
+                    .append("\n\n");
+                    break;
+            }
+        }
+        Label contenuto = new Label(sb.length() == 0 ? "Nessun prestito effettuato." : sb.toString());
+        contenuto.setWrapText(false);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        
+        alert.getDialogPane().setContent(contenuto);
         alert.setHeaderText("Storico prestiti di " + selezionato);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.showAndWait();

@@ -57,7 +57,7 @@ public class Validatore {
             throw new IllegalArgumentException("Matricola non valida");
         }
 
-        //controllo nome:
+        //controllo nome: ok
         if (utente.getNome() == null || utente.getNome().isBlank()) {
             throw new IllegalArgumentException("Nome obbligatorio");
         }
@@ -66,7 +66,7 @@ public class Validatore {
             throw new IllegalArgumentException("Nome non valido");
         }
 
-        //controllo cognome:
+        //controllo cognome: ok
         if (utente.getCognome() == null || utente.getCognome().isBlank()) {
             throw new IllegalArgumentException("Cognome obbligatorio");
         }
@@ -75,8 +75,11 @@ public class Validatore {
             throw new IllegalArgumentException("Cognome non valido");
         }
 
-        //controllo email:
-        if (utente.getEmail() == null || !utente.getEmail().toLowerCase().endsWith("@studenti.unisa.it")) {
+        //controllo email: ok
+        if (utente.getEmail() == null || utente.getEmail().isBlank()) {
+            throw new IllegalArgumentException("Email obbligatoria");
+        }
+        if (!utente.getEmail().toLowerCase().matches("^[A-Za-z0-9._%+-]+@studenti\\.unisa\\.it$")) {
             throw new IllegalArgumentException("Email istituzionale non valida");
         }
     }
