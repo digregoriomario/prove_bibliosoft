@@ -20,7 +20,7 @@
                     <items>
                         <MenuItem onAction="#onSalvaArchivio" text="Salva archivio" />
                         <SeparatorMenuItem />
-                        <MenuItem onAction="#onEsci" text="Esci" />
+                        <MenuItem onAction="#chiudiApplicazione" text="Esci" />
                     </items>
                 </Menu>
             </menus>

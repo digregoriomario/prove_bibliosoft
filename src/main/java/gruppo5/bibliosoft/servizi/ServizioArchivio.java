@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ServizioArchivio {
+public class ServizioArchivio implements InterfacciaServizioArchivio {
 
     private final String fileArchivio;
     private final ArchivioLibri archivioLibri;

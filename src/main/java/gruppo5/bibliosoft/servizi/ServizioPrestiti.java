@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class ServizioPrestiti {
+public class ServizioPrestiti implements InterfacciaServizioPrestiti {
     private final ArchivioPrestiti archivioPrestiti;
     private final ArchivioLibri archivioLibri;
     private final ArchivioUtenti archivioUtenti;
@@ -45,7 +45,8 @@ public class ServizioPrestiti {
 
     public void registraRestituzione(Prestito prestito) {
         if (prestito.getStato() == StatoPrestito.CONCLUSO)
-            return;
+            throw new IllegalStateException("Prestito concluso");
+            //return;
 
         prestito.setDataRestituzioneEffettiva(LocalDate.now());
         prestito.setStato(StatoPrestito.CONCLUSO);
@@ -70,7 +71,7 @@ public class ServizioPrestiti {
         //return risultato;
     }
     
-   public List<Prestito> cerca(Filtro<Prestito> filtro){
+   public List<Prestito> cerca(InterfacciaFiltro<Prestito> filtro){
        return archivioPrestiti.cerca(filtro);
    }
 

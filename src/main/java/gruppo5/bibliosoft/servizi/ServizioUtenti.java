@@ -7,7 +7,7 @@ import gruppo5.bibliosoft.strumenti.*;
 
 import java.util.List;
 
-public class ServizioUtenti {
+public class ServizioUtenti implements InterfacciaServizioUtenti {
 
     private final ArchivioUtenti archivioUtenti;
 

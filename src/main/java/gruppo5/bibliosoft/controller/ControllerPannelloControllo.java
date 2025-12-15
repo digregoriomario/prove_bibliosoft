@@ -1,19 +1,15 @@
 package gruppo5.bibliosoft.controller;
 
-import gruppo5.bibliosoft.modelli.*;
 import gruppo5.bibliosoft.servizi.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.time.LocalDate;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 public class ControllerPannelloControllo {
 
-    private ServizioPrestiti servizioPrestiti;
-    private ServizioUtenti servizioUtenti;
-    private ServizioLibri servizioLibri;
+    private InterfacciaServizioPrestiti servizioPrestiti;
+    private InterfacciaServizioUtenti servizioUtenti;
+    private InterfacciaServizioLibri servizioLibri;
     
     @FXML
     private Label prestitiInCorso;
@@ -39,7 +35,7 @@ public class ControllerPannelloControllo {
     @FXML
     private Label copieDisponibili;
     
-    public void impostaServizi(ServizioPrestiti servizioPrestiti,
+    public void impostaServizi(InterfacciaServizioPrestiti servizioPrestiti,
             ServizioUtenti servizioUtenti,
             ServizioLibri servizioLibri) {
         this.servizioPrestiti = servizioPrestiti;
@@ -66,7 +62,7 @@ public class ControllerPannelloControllo {
     }
     
     public void aggiornaStatisticheLibri(){
-        libriTotali.setText(Integer.toString(servizioLibri.getLibriTotali()));
+        libriTotali.setText(LocalDate.now().toString() + " " + Integer.toString(servizioLibri.getLibriTotali()));
         copieTotali.setText(Integer.toString(servizioLibri.getCopieTotali()));
         copieDisponibili.setText(Integer.toString(servizioLibri.getCopieDisponibili()));
     }

@@ -1,7 +1,7 @@
 package gruppo5.bibliosoft.controller;
 
 import gruppo5.bibliosoft.modelli.Libro;
-import gruppo5.bibliosoft.servizi.ServizioLibri;
+import gruppo5.bibliosoft.servizi.InterfacciaServizioLibri;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,10 +36,10 @@ public class ControllerLibri {
     @FXML
     private TableColumn<Libro, Integer> colCopieDisp;
 
-    private ServizioLibri servizioLibri;
+    private InterfacciaServizioLibri servizioLibri;
     private final ObservableList<Libro> dati = FXCollections.observableArrayList();
 
-    public void impostaServizi(ServizioLibri servizioLibri) {
+    public void impostaServizi(InterfacciaServizioLibri servizioLibri) {
         this.servizioLibri = servizioLibri;
         inizializzaTabella();
         aggiorna();
@@ -176,7 +176,7 @@ public class ControllerLibri {
                 try {
                     String isbn = isbnField.getText();
                     String titolo = titoloField.getText();
-                    List<String> autori = Arrays.asList(autoriField.getText()); //.split("\s*,\s*")
+                    List<String> autori = Arrays.asList(autoriField.getText().split("\s*,\s*"));
                     int anno = Integer.parseInt(annoField.getText());
                     int copie = Integer.parseInt(copieField.getText());
                     return new Libro(isbn, titolo, autori, anno, copie);

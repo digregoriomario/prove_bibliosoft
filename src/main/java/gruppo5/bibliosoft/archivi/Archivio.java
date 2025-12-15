@@ -21,7 +21,7 @@ public abstract class Archivio<T> implements InterfacciaArchivio<T> {   //archiv
     }
     
     @Override
-    public List<T> cerca(Filtro<T> filtro){ //funzione che restituisce una lista filtrata in base a un filtro
+    public List<T> cerca(InterfacciaFiltro<T> filtro){ //funzione che restituisce una lista filtrata in base a un filtro
         if(filtro == null)  //se il filtro è null, allora restuisco l'intera lista (non filtrata)
             return lista();
         

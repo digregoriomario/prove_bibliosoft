@@ -121,7 +121,7 @@ public class ControllerPrincipale {
             controllerUtenti.aggiorna();
         }
         if (controllerPrestiti != null) {
-            controllerPrestiti.aggiorna(FiltroPrestito.filtraAttivi());
+            controllerPrestiti.aggiorna();
         }
     }
 
@@ -142,7 +142,7 @@ public class ControllerPrincipale {
     }
 
     @FXML
-    private void onEsci(ActionEvent event) {
+    public void chiudiApplicazione(ActionEvent event) {
         if (modificheEffettuate) {
             Alert alert = new Alert(
                     Alert.AlertType.CONFIRMATION,

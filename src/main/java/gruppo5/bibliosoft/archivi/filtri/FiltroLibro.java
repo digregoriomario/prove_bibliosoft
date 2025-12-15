@@ -5,7 +5,7 @@ import gruppo5.bibliosoft.modelli.Libro;
 public class FiltroLibro {
 
     // Ricerca generica su titolo, autore, editore, ISBN
-    public static Filtro<Libro> ricerca(String testo) {
+    public static InterfacciaFiltro<Libro> ricerca(String testo) {
         String t = testo.toLowerCase();
         return l
                 -> l.getTitolo().toLowerCase().contains(t)
@@ -14,7 +14,7 @@ public class FiltroLibro {
     }
 
     // Filtro ISBN esatto
-    public static Filtro<Libro> ricercaIsbn(String codice) {
+    public static InterfacciaFiltro<Libro> ricercaIsbn(String codice) {
         return l -> l.getIsbn().equalsIgnoreCase(codice);
     }
 }

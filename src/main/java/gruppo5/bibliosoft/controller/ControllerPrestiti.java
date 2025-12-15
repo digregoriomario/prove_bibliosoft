@@ -1,18 +1,14 @@
 package gruppo5.bibliosoft.controller;
 
-import gruppo5.bibliosoft.archivi.filtri.Filtro;
 import gruppo5.bibliosoft.modelli.*;
 import gruppo5.bibliosoft.servizi.*;
 import gruppo5.bibliosoft.archivi.filtri.FiltroPrestito;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -20,8 +16,10 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import gruppo5.bibliosoft.archivi.filtri.InterfacciaFiltro;
 
-public class ControllerPrestiti implements Initializable {
+public class ControllerPrestiti{
+    private InterfacciaFiltro<Prestito> filtroCorrente = FiltroPrestito.filtraAttivi();
 
     @FXML
     private ComboBox<Utente> comboUtente;
@@ -46,17 +44,14 @@ public class ControllerPrestiti implements Initializable {
     
     
 
-    private ServizioPrestiti servizioPrestiti;
+    private InterfacciaServizioPrestiti servizioPrestiti;
     private ServizioUtenti servizioUtenti;
     private ServizioLibri servizioLibri;
 
     private final ObservableList<Prestito> datiPrestiti = FXCollections.observableArrayList();
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
 
-    public void impostaServizi(ServizioPrestiti servizioPrestiti,
+    public void impostaServizi(InterfacciaServizioPrestiti servizioPrestiti,
             ServizioUtenti servizioUtenti,
             ServizioLibri servizioLibri) {
         this.servizioPrestiti = servizioPrestiti;
@@ -64,7 +59,7 @@ public class ControllerPrestiti implements Initializable {
         this.servizioLibri = servizioLibri;
         inizializzaTabella();
         
-        aggiorna(FiltroPrestito.filtraAttivi());
+        aggiorna();
     }
 
     private void inizializzaTabella() {
@@ -86,17 +81,20 @@ public class ControllerPrestiti implements Initializable {
     
     @FXML
     private void mostraAttivi(ActionEvent event){
-        aggiorna(FiltroPrestito.filtraAttivi());
+        filtroCorrente = FiltroPrestito.filtraAttivi();
+        aggiorna();
     }
     
     @FXML
     private void mostraConclusi(ActionEvent event){
-        aggiorna(FiltroPrestito.filtraConclusi());
+        filtroCorrente = FiltroPrestito.filtraConclusi();
+        aggiorna();
     }
     
     @FXML
     private void mostraTutti(ActionEvent event){
-        aggiorna(null);
+        filtroCorrente = null;
+        aggiorna();
     }
 
     private void aggiornaCombo() {
@@ -122,7 +120,7 @@ public class ControllerPrestiti implements Initializable {
         try {
             servizioPrestiti.registraPrestito(utente, libro, data);
             ControllerPrincipale.modificheEffettuate = true;
-            aggiorna(null);
+            aggiorna();
         } catch (Exception ex) {
             mostraErrore(ex.getMessage());
         }
@@ -138,22 +136,23 @@ public class ControllerPrestiti implements Initializable {
         try {
             servizioPrestiti.registraRestituzione(prestito);
             ControllerPrincipale.modificheEffettuate = true;
-            aggiorna(null);
+            aggiorna();
         } catch (Exception ex) {
             mostraErrore(ex.getMessage());
         }
     }
 
-    public void aggiorna(Filtro<Prestito> filtro) {
-        datiPrestiti.setAll(servizioPrestiti.cerca(filtro));
+    public void aggiorna() {
+        servizioPrestiti.aggiornaRitardi();
+        datiPrestiti.setAll(servizioPrestiti.cerca(filtroCorrente));
         aggiornaCombo();
         pulisciCampi();
         dataPrevista.setDayCellFactory(dp -> new DateCell() {
             @Override
-            public void updateItem(LocalDate item, boolean empty) {
-                super.updateItem(item, empty);
-                LocalDate today = LocalDate.now();
-                if (item != null && (item.isBefore(today) || item.isEqual(today)))
+            public void updateItem(LocalDate elemento, boolean vuoto) {
+                super.updateItem(elemento, vuoto);
+                LocalDate oggi = LocalDate.now();
+                if (elemento != null && (elemento.isBefore(oggi) || elemento.isEqual(oggi)))
                     setDisable(true);
                 
             }
