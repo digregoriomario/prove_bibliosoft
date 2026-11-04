@@ -1,0 +1,18 @@
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", "SansSerif";
+    -fx-font-size: 12px;
+}
+
+.primary-button {
+    -fx-background-color: #3f51b5;
+    -fx-text-fill: white;
+}
+
+.danger-button {
+    -fx-background-color: #d32f2f;
+    -fx-text-fill: white;
+}
+
+.table-view {
+    -fx-table-cell-border-color: transparent;
+}

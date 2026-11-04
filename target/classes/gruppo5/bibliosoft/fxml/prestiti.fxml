@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppo5.bibliosoft.controller.ControllerPrestiti">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+    <children>
+        <HBox spacing="5">
+            <children>
+                <Label text="Utente:" />
+                <ComboBox fx:id="comboUtente" prefWidth="220" />
+                <Label text="Libro:" />
+                <ComboBox fx:id="comboLibro" prefWidth="220" />
+                <Label text="Restituzione prevista:" />
+                <DatePicker fx:id="dataPrevista" />
+                <Button onAction="#onRegistraPrestito" styleClass="primary-button" text="Registra prestito" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="tabellaPrestiti" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colUtente" prefWidth="180" text="Utente" />
+                <TableColumn fx:id="colLibro" prefWidth="220" text="Libro" />
+                <TableColumn fx:id="colInizio" prefWidth="100" text="Inizio" />
+                <TableColumn fx:id="colPrevista" prefWidth="100" text="Prevista" />
+                <TableColumn fx:id="colEffettiva" prefWidth="100" text="Effettiva" />
+                <TableColumn fx:id="colStato" prefWidth="90" text="Stato" />
+            </columns>
+        </TableView>
+
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <children>
+                <Button onAction="#onRegistraRestituzione" text="Restituisci selezionato" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gruppo5.bibliosoft.controller.ControllerUtenti">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+    <children>
+        <HBox spacing="5">
+            <children>
+                <Label text="Ricerca:" />
+                <TextField fx:id="campoRicerca" promptText="Cognome o Matricola" />
+                <Button onAction="#onRicerca" styleClass="primary-button" text="Trova" />
+                <Pane HBox.hgrow="ALWAYS" />
+                <Button onAction="#onAggiungi" text="Nuovo" />
+                <Button onAction="#onModifica" text="Modifica" />
+                <Button onAction="#onStorico" text="Storico prestiti" />
+                <Button onAction="#onElimina" styleClass="danger-button" text="Elimina" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="tabellaUtenti" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colMatricola" prefWidth="120" text="Matricola" />
+                <TableColumn fx:id="colCognome" prefWidth="150" text="Cognome" />
+                <TableColumn fx:id="colNome" prefWidth="150" text="Nome" />
+                <TableColumn fx:id="colEmail" prefWidth="250" text="Email" />
+                <TableColumn fx:id="colPrestiti" prefWidth="120" text="Prestiti attivi" />
+            </columns>
+        </TableView>
+    </children>
+</VBox>
