@@ -8,12 +8,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 
-
 public class ControllerPrincipale {
+
     @FXML
     private BorderPane root;
     @FXML
@@ -33,9 +34,9 @@ public class ControllerPrincipale {
     private ControllerLibri controllerLibri;
     private ControllerUtenti controllerUtenti;
     private ControllerPrestiti controllerPrestiti;
-    
+
     @FXML
-    public void cambioTab(){
+    public void cambioTab() {
         System.out.print("\n\ncambiota\n\n");
         aggiornaTutto();
     }
@@ -58,7 +59,7 @@ public class ControllerPrincipale {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gruppo5/bibliosoft/fxml/libri.fxml"));
             Node content = loader.load();
-            controllerLibri= loader.getController();
+            controllerLibri = loader.getController();
             controllerLibri.impostaServizi(servizioLibri);
             tabLibri.setContent(content);
         } catch (IOException e) {
@@ -91,12 +92,15 @@ public class ControllerPrincipale {
     }
 
     public void aggiornaTutto() {
-        if (controllerLibri != null) 
+        if (controllerLibri != null) {
             controllerLibri.aggiorna();
-        if (controllerUtenti != null)
+        }
+        if (controllerUtenti != null) {
             controllerUtenti.aggiorna();
-        if (controllerPrestiti != null)
+        }
+        if (controllerPrestiti != null) {
             controllerPrestiti.aggiorna();
+        }
     }
 
     @FXML
@@ -116,7 +120,24 @@ public class ControllerPrincipale {
 
     @FXML
     private void onEsci(ActionEvent event) {
-        // qui potresti aggiungere dialog di conferma
-        root.getScene().getWindow().hide();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Ci sono modifiche non salvate. Vuoi\n"
+                + "salvare prima di uscire?",
+                ButtonType.YES, ButtonType.NO);
+        alert.setHeaderText("Conferma chiusura");
+        alert.showAndWait().ifPresent(bt -> {
+            if (bt == ButtonType.YES) {
+                try {
+                    servizioArchivio.salva();
+                    root.getScene().getWindow().hide();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else if (bt == ButtonType.NO) {
+                root.getScene().getWindow().hide();
+            }
+
+        });
+
     }
 }
