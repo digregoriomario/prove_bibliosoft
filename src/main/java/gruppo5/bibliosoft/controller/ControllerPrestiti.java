@@ -2,7 +2,7 @@ package gruppo5.bibliosoft.controller;
 
 import gruppo5.bibliosoft.modelli.*;
 import gruppo5.bibliosoft.servizi.*;
-        
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -13,61 +13,72 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class ControllerPrestiti implements Initializable{
-    @FXML private ComboBox<Utente> comboUtente;
-    @FXML private ComboBox<Libro> comboLibro;
-    @FXML private DatePicker dataPrevista;
-    @FXML private TableView<Prestito> tabellaPrestiti;
-    @FXML private TableColumn<Prestito, String> colUtente;
-    @FXML private TableColumn<Prestito, String> colLibro;
-    @FXML private TableColumn<Prestito, LocalDate> colInizio;
-    @FXML private TableColumn<Prestito, LocalDate> colPrevista;
-    @FXML private TableColumn<Prestito, LocalDate> colEffettiva;
-    @FXML private TableColumn<Prestito, StatoPrestito> colStato;
+public class ControllerPrestiti implements Initializable {
+
+    @FXML
+    private ComboBox<Utente> comboUtente;
+    @FXML
+    private ComboBox<Libro> comboLibro;
+    @FXML
+    private DatePicker dataPrevista;
+    @FXML
+    private TableView<Prestito> tabellaPrestiti;
+    @FXML
+    private TableColumn<Prestito, String> colUtente;
+    @FXML
+    private TableColumn<Prestito, String> colLibro;
+    @FXML
+    private TableColumn<Prestito, LocalDate> colInizio;
+    @FXML
+    private TableColumn<Prestito, LocalDate> colPrevista;
+    @FXML
+    private TableColumn<Prestito, LocalDate> colEffettiva;
+    @FXML
+    private TableColumn<Prestito, StatoPrestito> colStato;
 
     private ServizioPrestiti servizioPrestiti;
     private ServizioUtenti servizioUtenti;
     private ServizioLibri servizioLibri;
 
     private final ObservableList<Prestito> datiPrestiti = FXCollections.observableArrayList();
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
 
     public void impostaServizi(ServizioPrestiti servizioPrestiti,
-                            ServizioUtenti servizioUtenti,
-                            ServizioLibri servizioLibri) {
+            ServizioUtenti servizioUtenti,
+            ServizioLibri servizioLibri) {
         this.servizioPrestiti = servizioPrestiti;
         this.servizioUtenti = servizioUtenti;
         this.servizioLibri = servizioLibri;
         inizializzaTabella();
-        inizializzaCombo();
         aggiorna();
     }
 
     private void inizializzaTabella() {
-        colUtente.setCellValueFactory(c ->
-                new javafx.beans.property.SimpleStringProperty(c.getValue().getUtente().toString()));
-        colLibro.setCellValueFactory(c ->
-                new javafx.beans.property.SimpleStringProperty(c.getValue().getLibro().getTitolo()));
-        colInizio.setCellValueFactory(c ->
-                new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getDataInizio()));
-        colPrevista.setCellValueFactory(c ->
-                new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getDataPrevista()));
-        colEffettiva.setCellValueFactory(c ->
-                new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getDataRestituzioneEffettiva()));
-        colStato.setCellValueFactory(c ->
-                new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getStato()));
+        colUtente.setCellValueFactory(c
+                -> new javafx.beans.property.SimpleStringProperty(c.getValue().getUtente().toString()));
+        colLibro.setCellValueFactory(c
+                -> new javafx.beans.property.SimpleStringProperty(c.getValue().getLibro().getTitolo()));
+        colInizio.setCellValueFactory(c
+                -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getDataInizio()));
+        colPrevista.setCellValueFactory(c
+                -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getDataPrevista()));
+        colEffettiva.setCellValueFactory(c
+                -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getDataRestituzioneEffettiva()));
+        colStato.setCellValueFactory(c
+                -> new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getStato()));
 
         tabellaPrestiti.setItems(datiPrestiti);
     }
 
-    private void inizializzaCombo() {
+    private void aggiornaCombo() {
         comboUtente.setItems(FXCollections.observableArrayList(servizioUtenti.listaUtenti()));
         comboLibro.setItems(FXCollections.observableArrayList(servizioLibri.listaLibri()));
     }
@@ -108,8 +119,16 @@ public class ControllerPrestiti implements Initializable{
 
     public void aggiorna() {
         datiPrestiti.setAll(servizioPrestiti.monitoraggio());
-        comboUtente.setItems(FXCollections.observableArrayList(servizioUtenti.listaUtenti()));
-        comboLibro.setItems(FXCollections.observableArrayList(servizioLibri.listaLibri()));
+        aggiornaCombo();
+        dataPrevista.setDayCellFactory(dp -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                LocalDate today = LocalDate.now();
+                if (item != null && (item.isBefore(today) || item.isEqual(today)))
+                    setDisable(true);
+            }
+        });
     }
 
     private void mostraErrore(String messaggio) {
