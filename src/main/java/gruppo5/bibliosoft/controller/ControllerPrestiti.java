@@ -83,6 +83,7 @@ public class ControllerPrestiti implements Initializable{
         }
         try {
             servizioPrestiti.registraPrestito(utente, libro, data);
+            ControllerPrincipale.modificheEffettuate = true;
             aggiorna();
         } catch (Exception ex) {
             mostraErrore(ex.getMessage());
@@ -98,6 +99,7 @@ public class ControllerPrestiti implements Initializable{
         }
         try {
             servizioPrestiti.registraRestituzione(prestito);
+            ControllerPrincipale.modificheEffettuate = true;
             aggiorna();
         } catch (Exception ex) {
             mostraErrore(ex.getMessage());

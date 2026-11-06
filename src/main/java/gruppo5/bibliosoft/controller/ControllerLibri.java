@@ -74,6 +74,7 @@ public class ControllerLibri {
         dialog.showAndWait().ifPresent(libro -> {
             try {
                 servizioLibri.aggiungiLibro(libro);
+                ControllerPrincipale.modificheEffettuate = true;
                 aggiorna();
             } catch (Exception ex) {
                 mostraErrore(ex.getMessage());
@@ -98,6 +99,7 @@ public class ControllerLibri {
                 selezionato.setCopieTotali(libro.getCopieTotali());
                 selezionato.setCopieDisponibili(libro.getCopieDisponibili());
                 servizioLibri.modificaLibro(selezionato);
+                ControllerPrincipale.modificheEffettuate = true;
                 aggiorna();
             } catch (Exception ex) {
                 mostraErrore(ex.getMessage());
@@ -120,6 +122,7 @@ public class ControllerLibri {
             if (bt == ButtonType.YES) {
                 try {
                     servizioLibri.eliminaLibro(selezionato);
+                    ControllerPrincipale.modificheEffettuate = true;
                     aggiorna();
                 } catch (Exception ex) {
                     mostraErrore(ex.getMessage());

@@ -62,6 +62,7 @@ public class ControllerUtenti {
         finestraDialogo.showAndWait().ifPresent(u -> {
             try {
                 servizioUtenti.aggiungiUtente(u);
+                ControllerPrincipale.modificheEffettuate = true;
                 aggiorna();
             } catch (Exception ex) {
                 mostraErrore(ex.getMessage());
@@ -84,6 +85,7 @@ public class ControllerUtenti {
                 selezionato.setCognome(u.getCognome());
                 selezionato.setEmail(u.getEmail());
                 servizioUtenti.modificaUtente(selezionato);
+                ControllerPrincipale.modificheEffettuate = true;
                 aggiorna();
             } catch (Exception ex) {
                 mostraErrore(ex.getMessage());
@@ -106,6 +108,7 @@ public class ControllerUtenti {
             if (bt == ButtonType.YES) {
                 try {
                     servizioUtenti.eliminaUtente(selezionato);
+                    ControllerPrincipale.modificheEffettuate = true;
                     aggiorna();
                 } catch (Exception ex) {
                     mostraErrore(ex.getMessage());

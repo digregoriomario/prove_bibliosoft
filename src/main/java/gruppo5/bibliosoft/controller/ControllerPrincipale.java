@@ -3,6 +3,7 @@ package gruppo5.bibliosoft.controller;
 import gruppo5.bibliosoft.servizi.*;
 
 import java.io.IOException;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +13,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 
 public class ControllerPrincipale {
+
+    public static boolean modificheEffettuate = false;
 
     @FXML
     private BorderPane root;
@@ -107,8 +111,9 @@ public class ControllerPrincipale {
     private void onSalvaArchivio(ActionEvent event) {
         try {
             servizioArchivio.salva();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Archivio salvato con successo.");
-            alert.setHeaderText("Salvataggio completato");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Salvataggio completato con successo");
+            modificheEffettuate = false;
             alert.showAndWait();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -120,24 +125,29 @@ public class ControllerPrincipale {
 
     @FXML
     private void onEsci(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Ci sono modifiche non salvate. Vuoi\n"
-                + "salvare prima di uscire?",
-                ButtonType.YES, ButtonType.NO);
-        alert.setHeaderText("Conferma chiusura");
-        alert.showAndWait().ifPresent(bt -> {
-            if (bt == ButtonType.YES) {
+        if (modificheEffettuate) {
+            Alert alert = new Alert(
+                    Alert.AlertType.CONFIRMATION,
+                    "Ci sono modifiche non salvate. Vuoi salvare prima di uscire?",
+                    ButtonType.CANCEL,  ButtonType.NO, ButtonType.YES
+            );
+            alert.setHeaderText("Conferma chiusura");
+            alert.initModality(Modality.APPLICATION_MODAL);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.YES) {
                 try {
                     servizioArchivio.salva();
+                    modificheEffettuate = false;
                     root.getScene().getWindow().hide();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            } else if (bt == ButtonType.NO) {
+            } else if (result.isPresent() && result.get() == ButtonType.NO)
                 root.getScene().getWindow().hide();
-            }
-
-        });
-
+            
+        } else
+            root.getScene().getWindow().hide();
     }
 }
